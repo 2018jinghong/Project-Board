@@ -2,18 +2,16 @@
 //用于获得页面基础信息，例如总页数
 //
 function GetPageInfo() {
+    //定义
     $.get("test.php?page=0", function (data, status) {
         var data = JSON.parse(data);
-        var v = $(".switchPage-button").clone();
+        var v = $(".switchPage-button").clone();//复制按钮
         for (var i = 2; i <= data.AllPages; i++) {
-
             v.html(i);
             v.appendTo(".page-container");
             v = v.clone();
         }
-
     });
-
 }
 
 //summary
@@ -29,7 +27,7 @@ function GetPassageTitleById(id) {
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return null;
+    if (r !== null) return unescape(r[2]); return null;
     }
 
 
@@ -39,38 +37,44 @@ function getQueryString(name) {
 function Get_data(ind) {
     //使用get目录在test.php获得ind页的文章
     $.get("test.php?page=" + ind, function (data, status) {
-        var data = JSON.parse(data);
+        try {
+            var data = JSON.parse(data);
+            $(".spinner").hide();//显示等待
+            $("#model-comment").show();//隐藏模板
+            $("#model-message").show();
+            //将文章添加到DOM
+            for (var i = 0; i < data.count; i++) {
 
-        $("#model-comment").show();//隐藏模板
-        $("#model-message").show();
-        //将文章添加到DOM
-        for (var i = 0; i < data.count; i++) {
-            
-            if (data.source_id[i] == 0) {
-                var v = $("#model-message").clone();//复制模板
-                v.id = "msg_" + data.id[i];
-                v.attr("id",v.id);
-                v.find(".message-title").html(data.Title[i]);//标题
-                v.find(".message-text").html(data.text[i]);//正文
-                v.find(".love-num").html(data.love[i]);//赞
-                v.find(".dislike-num").html(data.dislike[i]);//踩
-                v.appendTo(".message-container");
-            } else {
-                var v = $("#model-comment").clone();//复制模板
-                v.id = "msg_" + data.id[i];
-                v.attr("id",v.id);
-                v.find("h3").html(data.Title[i]);//标题
-                v.find("p").html(data.text[i]);//正文
-                v.find(".comment-love-num").html(data.love[i]);//赞
-                v.find(".comment-dislike-num").html(data.dislike[i]);//踩
-                v.appendTo($("#msg_" + data.source_id[i]).find(".comment-container")[0]);
-                v.show();
+                if (data.source_id[i] === 0) {
+                    var v = $("#model-message").clone();//复制模板
+                    v.id = "msg_" + data.id[i];
+                    v.attr("id", v.id);//修改id
+                    v.find(".message-title").html(data.Title[i]);//标题
+                    v.find(".message-text").html(data.text[i]);//正文
+                    v.find(".love-num").html(data.love[i]);//赞
+                    v.find(".dislike-num").html(data.dislike[i]);//踩
+                    v.appendTo(".message-container");
+                } else {
+                    var v = $("#model-comment").clone();//复制模板
+                    v.id = "msg_" + data.id[i];
+                    v.attr("id", v.id);
+                    v.find("h3").html(data.Title[i]);//标题
+                    v.find("p").html(data.text[i]);//正文
+                    v.find(".comment-love-num").html(data.love[i]);//赞
+                    v.find(".comment-dislike-num").html(data.dislike[i]);//踩
+                    v.appendTo($("#msg_" + data.source_id[i]).find(".comment-container")[0]);
+                    v.show();
+                }
+
             }
+            $("#model-message").hide();//隐藏模板
+            $("#model-comment").hide();//隐藏模板
+        // $(".message-container").load("model.html .message")
+        } catch (e) {
 
         }
-        $("#model-message").hide();//隐藏模板
-        $("#model-comment").hide();//隐藏模板
-       // $(".message-container").load("model.html .message")
+        
+        $(".spinner").hide();//隐藏等待
     });
 }
 
@@ -94,9 +98,9 @@ function love(f_id) {
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("kbn-version", "5.3.0");
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                window.location.href = us.nextUrl;
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                window.history.back();
             }
         }
     };
@@ -122,9 +126,9 @@ function dislike(f_id) {
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("kbn-version", "5.3.0");
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                window.location.href = us.nextUrl;
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                
             }
         }
     };
@@ -137,11 +141,6 @@ function dislike(f_id) {
     );
 
 }
-
-
-
-
-
 
 //summary
 //用于发送新的文章
@@ -158,8 +157,8 @@ function Post_new(f_id) {
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("kbn-version", "5.3.0");
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
                 window.history.back();
             }
         }
@@ -172,6 +171,7 @@ function Post_new(f_id) {
             "source_id": us.source_id, "time": us.time
         })
     );
+
     if(!IsPC()){
         window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
     }

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,7 +21,16 @@
             onclick="location.href='newPost.html?source=0'">+</button>
     </header>
     <div class="p-container">
+
         <div id="message-container" class="message-container">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+
             <div class="message" id="model-message">
                 <div class="message-body">
                     <h3 class="message-title">Title</h3>
@@ -31,7 +40,7 @@
                     <span><button class="like button button-action button-circle" onclick="love();">👍</button><span class="love-num">0</span></span>
                     <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span class="dislike-num">0</span></span>
                     <button class="Comment-button button button-action button-pill" onclick="newPost()">Comment</button>
-                    <div  class="comment-container">
+                    <div class="comment-container">
                     </div>
                 </div>
             </div>
@@ -46,9 +55,11 @@
                     <button class="dislike button button-action button-circle" onclick="dislike();">👎</button>
                     <h4 class="comment-dislike-num">0</h4>
                     <button class="Comment-button button button-action button-pill" onclick="location.href='newPost.html?source='+$(this).parent().parent().attr('id')"
-                        ;>Comment</button>
-                        <div class="comment-container">
-                        </div>
+                            ;>
+                        Comment
+                    </button>
+                    <div class="comment-container">
+                    </div>
                 </div>
             </div>
         </div>
