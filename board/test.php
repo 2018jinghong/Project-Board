@@ -59,7 +59,7 @@ class response{
                 "id"=>array(12,7,9,5),
                 "source_id"=>array(0,12,12,7),
                 "user_ip"=>array("10.0.0.9","10.19.12.1","10.19.12.1","10.19.12.1"),
-                "love"=>array(10086,1113,8,7),
+                "like"=>array(10086,1113,8,7),
                 "dislike"=>array(98,2,5,55),
                 "time"=>array(32457689,1232434,5,56645),
                 "count"=>4
@@ -72,7 +72,7 @@ class response{
                 "source_id"=>array(0,0),
                 "id"=>array(1,70),
                 "user_ip"=>array("10.0.0.9","10.19.12.1"),
-                "love"=>array(10086,1113),
+                "like"=>array(10086,1113),
                 "dislike"=>array(98,0),
                 "time"=>array(32457689,1232434),
                 "count"=>2
@@ -91,7 +91,7 @@ class response{
             "text"=>array("Hello World","JS"),
             "source_id"=>array(0,0),
             "user_ip"=>array("10.0.0.9","10.19.12.1"),
-            "love"=>array(10086,1113),
+            "like"=>array(10086,1113),
             "dislike"=>array(98,0),
             "time"=>array(32457689,1232434),
             "count"=>2

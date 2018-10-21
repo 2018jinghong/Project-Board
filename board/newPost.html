@@ -1,56 +1,100 @@
 ﻿<!doctype html>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>书写新的故事</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./Assets/favicon.ico" rel="icon" type="image/x-icon">
-    <link rel="stylesheet" href="./Css/css.css">
-    <link rel="stylesheet" href="./Css/buttons.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/buttons.css">
+    <!-- <link rel="stylesheet" href="./css/component.css">
+    <link rel="stylesheet" href="./css/demo.css">
+    <link rel="stylesheet" href="./css/normalize.css"> -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/word/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/word/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="css/word/sheets-of-paper-a4.css">
+    <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="./css/newPost.css">
+
+
 </head>
+
 <body>
     <header>
         <nav role="navigation">
             <div class="logo">
-                    <img alt="logo" src="./Assets/Joy.png" height="32" />
+                <img alt="logo" src="./Assets/Joy.png" height="32" />
             </div>
         </nav>
-        <button class="back-home button-small button-highlight button-box button-giant button-longshadow-right button-longshadow-expand" onclick="location.href='./'">🏠</button>
+        <button class="back-home button-small button-highlight button-box button-giant button-longshadow-right button-longshadow-expand"
+            onclick="location.href='./'">🏠</button>
     </header>
-    <h1>Write something here</h1>
-   <div id="source-container">
-
-    <h2 id="source-title"></h2>
-   </div>
-
-    <div class="message-container">
-        <div class="message"></div>
+    <!-- <h1>Write something here</h1> -->
+    <div id="source-container">
+        <h2 id="source-title"></h2>
     </div>
-    <form id="maininput" >
-        <input id="Title" type="text" />
-        <input id="mainText" type="text" />
-        <button class="button button-action button-pill"  onclick="Post_new(0);">Submit</button>
-    </form>
 
+    <!-- <div class="message-container">
+        <div class="message"></div>
+    </div> -->
+    <!-- <form id="maininput">
+        <input class="title" id="title" type="text" />
+        <input class="text" id="text" type="text" />
+      
+    </form> -->
+    <div class="content">
+        <!-- <span class="input input--kaede">
+                <input class="title input__field input__field--kaede" type="text" id="input-35" />
+                <label class="textinput__label input__label--kaede" for="input-35">
+                    <span class="input__label-content input__label-content--kaede">First Name</span>
+                </label>
+            </span> -->
 
+        <div class="document">
+            <div class="title page" contenteditable="true"></div>
+            <div class="text page" contenteditable="true">
+                <h1>First <code>.page</code> element</h1>
+                <p>注意，页面中的文字是可以进行修改的。</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore
+                    eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+        <button class="submit-button button button-action button-pill" onclick="Post();">Submit</button>
+    </div>
+    
     <footer>
         <div>
             <h1>留言板</h1>
             <p>dev by </p>
         </div>
- </footer>
-    <script src="./JS/js.js"></script>
-  <script>
-     var source= getQueryString("source");
-     if(source=="0"){
-        $("#source-container").hide();
-     }
-     else{
-      var id= GetPassageTitleById(source.replace("msg_",""));
+    </footer>
 
-     }
-      </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./JS/js.js"></script>
+    <script>
+        var source = getQueryString("source");
+        if (source == "0") {
+            $("#source-container").hide();
+        }
+        else {
+            var id = GetPassageTitleById(source.replace("msg_", ""));
+        }
+        function Post() {
+            if (source == "0") {
+                Post_new("0");
+            }
+            else {
+                Post_new(source.replace("msg_", ""));
+            }
+        }
+    </script>
 
 </body>
+
 </html>

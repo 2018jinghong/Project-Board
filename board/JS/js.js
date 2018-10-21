@@ -22,46 +22,48 @@ function GetPassageTitleById(id) {
         var data = JSON.parse(data);   
         $("#source-title").html(id+data.Title);
     });
-
 }
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
     if (r !== null) return unescape(r[2]); return null;
-    }
-
+}
 
 //summary
 //用于获得文章信息
 //ind 当前页数
 function Get_data(ind) {
+    $(".spinner").show();//显示等待
     //使用get目录在test.php获得ind页的文章
     $.get("test.php?page=" + ind, function (data, status) {
         try {
             var data = JSON.parse(data);
-            $(".spinner").hide();//显示等待
+          
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
             for (var i = 0; i < data.count; i++) {
-
                 if (data.source_id[i] === 0) {
                     var v = $("#model-message").clone();//复制模板
                     v.id = "msg_" + data.id[i];
                     v.attr("id", v.id);//修改id
                     v.find(".message-title").html(data.Title[i]);//标题
+                   // v.find(".Comment-button").attr("id", v.id);//
                     v.find(".message-text").html(data.text[i]);//正文
-                    v.find(".love-num").html(data.love[i]);//赞
+                    v.find(".like-num").html(data.like[i]);//赞
                     v.find(".dislike-num").html(data.dislike[i]);//踩
                     v.appendTo(".message-container");
-                } else {
+                } 
+                else 
+                {
                     var v = $("#model-comment").clone();//复制模板
                     v.id = "msg_" + data.id[i];
                     v.attr("id", v.id);
-                    v.find("h3").html(data.Title[i]);//标题
-                    v.find("p").html(data.text[i]);//正文
-                    v.find(".comment-love-num").html(data.love[i]);//赞
-                    v.find(".comment-dislike-num").html(data.dislike[i]);//踩
+                    v.find(".message-title").html(data.Title[i]);//标题
+                    v.find(".message-text").html(data.text[i]);//正文
+                  //  v.find(".Comment-button").attr("id", v.id);//
+                    v.find(".like-num").html(data.like[i]);//赞
+                    v.find(".dislike-num").html(data.dislike[i]);//踩
                     v.appendTo($("#msg_" + data.source_id[i]).find(".comment-container")[0]);
                     v.show();
                 }
@@ -69,7 +71,7 @@ function Get_data(ind) {
             }
             $("#model-message").hide();//隐藏模板
             $("#model-comment").hide();//隐藏模板
-        // $(".message-container").load("model.html .message")
+            // $(".message-container").load("model.html .message")
         } catch (e) {
 
         }
@@ -82,15 +84,20 @@ function Get_data(ind) {
 //用于清理DOM文章
 //
 function Clean() {
+    var v0 = $(".spinner").clone();
     var v = $("#model-message").clone();
+    var v2 = $("#model-comment").clone();
     $("#message-container").empty();
+    v0.appendTo("#message-container");
     v.appendTo("#message-container");
+    v2.appendTo("#message-container");
+    $(".spinner").show();//显示等待
 }
 
 //summary
 //用于点赞
 //
-function love(f_id) {
+function like(f_id) {
     var myDate = new Date();
     var mytime = myDate.getTime();
     var xhr = new XMLHttpRequest();
@@ -107,7 +114,7 @@ function love(f_id) {
 
     xhr.send(
         JSON.stringify({
-            "Command": "Love",
+            "Command": "like",
             "source_id": f_id, "time": mytime
         })
     );
@@ -135,7 +142,7 @@ function dislike(f_id) {
 
     xhr.send(
         JSON.stringify({
-            "Command": "Dislike",
+            "Command": "dislike",
             "source_id": f_id, "time": mytime
         })
     );
@@ -150,7 +157,7 @@ function Post_new(f_id) {
     var myDate = new Date();
     var mytime = myDate.getTime();
 
-    var us = { title: $("#Title").val(), text: $("#Text").val(), source_id: f_id, time: mytime };
+    var us = { title: $("#title").val(), text: $("#text").val(), source_id: f_id, time: mytime };
     //准备
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/userPost", true);//

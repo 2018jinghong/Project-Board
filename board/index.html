@@ -1,14 +1,16 @@
 ﻿<!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>精弘</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./Assets/favicon.ico" rel="icon" type="image/x-icon">
-    <link rel="stylesheet" href="./Css/buttons.css">
-    <link rel="stylesheet" href="./Css/css.css">
+    <link rel="stylesheet" href="./css/buttons.css">
+    <link rel="stylesheet" href="./css/css.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
     <header>
         <nav role="navigation">
@@ -23,6 +25,7 @@
     <div class="p-container">
 
         <div id="message-container" class="message-container">
+
             <div class="spinner">
                 <div class="rect1"></div>
                 <div class="rect2"></div>
@@ -36,31 +39,33 @@
                     <h3 class="message-title">Title</h3>
                     <p class="message-text">The first message</p>
                 </div>
-                <div class="maessage-footer">
-                    <span><button class="like button button-action button-circle" onclick="love();">👍</button><span class="love-num">0</span></span>
-                    <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span class="dislike-num">0</span></span>
-                    <button class="Comment-button button button-action button-pill" onclick="newPost()">Comment</button>
-                    <div class="comment-container">
+                <div>
+                    <div class="message-footer">
+                        <span><button class="like button button-action button-circle" onclick="like();">👍</button><span
+                                class="like-num">0</span></span>
+                        <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span
+                                class="dislike-num">0</span></span>
+                        <button class="Comment-button button button-action button-pill" onclick="newPost($(this)); ">Comment</button>
                     </div>
+                    <div class="comment-container"></div>
                 </div>
             </div>
-            <div class="comment" id="model-comment">
-                <div class="comment-body">
-                    <h3>Title</h3>
-                    <p>The first message</p>
+            <div class="message comment" id="model-comment">
+                <div class="message-body">
+                    <h3 class="message-title">Title</h3>
+                    <p class="message-text">The first message</p>
                 </div>
-                <div class="comment-footer">
-                    <button class="like button button-action button-circle" onclick="love();">👍</button>
-                    <h4 class="comment-love-num">0</h4>
-                    <button class="dislike button button-action button-circle" onclick="dislike();">👎</button>
-                    <h4 class="comment-dislike-num">0</h4>
-                    <button class="Comment-button button button-action button-pill" onclick="location.href='newPost.html?source='+$(this).parent().parent().attr('id')"
-                            ;>
-                        Comment
-                    </button>
-                    <div class="comment-container">
+                <div>
+                    <div class="message-footer">
+                        <span><button class="like button button-action button-circle" onclick="like();">👍</button><span
+                                class="like-num">0</span></span>
+                        <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span
+                                class="dislike-num">0</span></span>
+                        <button class="Comment-button button button-action button-pill" onclick="newPost($(this)); ">Comment</button>
                     </div>
+                    <div class="comment-container"></div>
                 </div>
+
             </div>
         </div>
         <div class="page-container" id="page-container">
@@ -74,13 +79,16 @@
     <!-- Scripts -->
     <script type="text/javascript" src="./JS/js.js"></script>
     <script type="text/javascript">
-        function newPost() {
-            location.href='newPost.html?source='+$(this).parent().parent().attr('id');
+        function newPost(combut) {
+            location.href = 'newPost.html?source=' + combut.parent().parent().parent().attr('id');
         }
     </script>
 </body>
 <script>
+    $("#model-message").hide();//隐藏模板
+    $("#model-comment").hide();//隐藏模板
     GetPageInfo();
     Get_data(1);
 </script>
+
 </html>
