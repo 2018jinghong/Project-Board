@@ -77,9 +77,8 @@ text-align: center;
 }
 
 .submit-button{
-	margin-left: auto;
-
-	margin-right: auto;
+	margin: 1cm auto;
+	margin-bottom: 100px;
 }
 
 	
@@ -91,6 +90,7 @@ margin-right: auto;
 	
 }
 .title{
-
 	min-height: 1cm;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }

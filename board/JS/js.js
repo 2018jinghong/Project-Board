@@ -157,7 +157,7 @@ function Post_new(f_id) {
     var myDate = new Date();
     var mytime = myDate.getTime();
 
-    var us = { title: $("#title").val(), text: $("#text").val(), source_id: f_id, time: mytime };
+    var us = { title: $(".title").text(), text: $(".text").text(), source_id: f_id, time: mytime };
     //准备
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/userPost", true);//
