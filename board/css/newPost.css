@@ -76,17 +76,16 @@ text-align: center;
 	/* display: inline; */
 }
 
+
 .submit-button{
-	margin: 1cm auto;
-	margin-bottom: 100px;
+	margin: auto;
 }
 
 	
 
 #source-container{
-
-margin-left: auto;
-margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 	
 }
 .title{
