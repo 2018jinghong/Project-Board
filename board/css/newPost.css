@@ -78,6 +78,7 @@ text-align: center;
 
 
 .submit-button{
+	display: block;
 	margin: auto;
 }
 
