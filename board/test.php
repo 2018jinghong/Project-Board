@@ -54,15 +54,15 @@ class response{
 
         if($_REQUEST['page']==1){
             $result=array(
-                "Title"=>array("大家好","那么好","tes","ds"),
-                "text"=>array("Hello World","JS","Hello World","JS"),
-                "id"=>array(12,7,9,5),
-                "source_id"=>array(0,12,12,7),
-                "user_ip"=>array("10.0.0.9","10.19.12.1","10.19.12.1","10.19.12.1"),
-                "like"=>array(10086,1113,8,7),
-                "dislike"=>array(98,2,5,55),
-                "time"=>array(32457689,1232434,5,56645),
-                "count"=>4
+                "Title"=>array("大家好","那么好","tes","ds","那么好"),
+                "text"=>array("Hello World","JS","Hello World","JS","JS"),
+                "id"=>array(12,7,9,5,8),
+                "source_id"=>array(0,12,12,7,7),
+                "user_ip"=>array("10.0.0.9","10.19.12.1","10.19.12.1","10.19.12.1","10.19.12.1"),
+                "like"=>array(10086,1113,8,7,0),
+                "dislike"=>array(98,2,5,55,0),
+                "time"=>array(32457689,1232434,5,56645,9989898),
+                "count"=>5
             );
             echo json_encode($result);
         }else{
