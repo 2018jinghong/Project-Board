@@ -6,7 +6,7 @@ function GetPageInfo() {
     $.get("test.php?page=0", function (data, status) {
         var data = JSON.parse(data);
         var v = $(".switchPage-button").clone();//复制按钮
-        for (var i = 2; i <= data.AllPages; i++) {
+        for (var i = 2; i <= data.allPages; i++) {
             v.html(i);
             v.appendTo(".page-container");
             v = v.clone();
@@ -18,9 +18,9 @@ function GetPageInfo() {
 //文章标题
 //
 function GetPassageTitleById(id) {
-    $.get("test.php?id="+id, function (data, status) {
-        var data = JSON.parse(data);   
-        $("#source-title").html(id+data.Title);
+    $.get("test.php?id=" + id, function (data, status) {
+        var data = JSON.parse(data);
+        $("#source-title").html(id + data.title);
     });
 }
 function getQueryString(name) {
@@ -38,33 +38,32 @@ function Get_data(ind) {
     $.get("test.php?page=" + ind, function (data, status) {
         try {
             var data = JSON.parse(data);
-          
+
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
             for (var i = 0; i < data.count; i++) {
-                if (data.source_id[i] === 0) {
+                if (data.sourceId[i] === 0) {
                     var v = $("#model-message").clone();//复制模板
                     v.id = "msg_" + data.id[i];
                     v.attr("id", v.id);//修改id
-                    v.find(".message-title").html(data.Title[i]);//标题
-                   // v.find(".Comment-button").attr("id", v.id);//
+                    v.find(".message-title").html(data.title[i]);//标题
+                    // v.find(".Comment-button").attr("id", v.id);//
                     v.find(".message-text").html(data.text[i]);//正文
                     v.find(".like-num").html(data.like[i]);//赞
                     v.find(".dislike-num").html(data.dislike[i]);//踩
                     v.appendTo(".message-container");
-                } 
-                else 
-                {
+                }
+                else {
                     var v = $("#model-comment").clone();//复制模板
                     v.id = "msg_" + data.id[i];
                     v.attr("id", v.id);
-                    v.find(".message-title").html(data.Title[i]);//标题
+                    v.find(".message-title").html(data.title[i]);//标题
                     v.find(".message-text").html(data.text[i]);//正文
-                  //  v.find(".Comment-button").attr("id", v.id);//
+                    //  v.find(".Comment-button").attr("id", v.id);//
                     v.find(".like-num").html(data.like[i]);//赞
                     v.find(".dislike-num").html(data.dislike[i]);//踩
-                    v.appendTo($("#msg_" + data.source_id[i]).find(".comment-container")[0]);
+                    v.appendTo($("#msg_" + data.sourceId[i]).find(".comment-container")[0]);
                     v.show();
                 }
 
@@ -75,7 +74,7 @@ function Get_data(ind) {
         } catch (e) {
 
         }
-        
+
         $(".spinner").hide();//隐藏等待
     });
 }
@@ -114,8 +113,9 @@ function like(f_id) {
 
     xhr.send(
         JSON.stringify({
-            "Command": "like",
-            "source_id": f_id, "time": mytime
+            "command": "like",
+            "data": [
+                {"sourceId": f_id, "time": mytime}]
         })
     );
 
@@ -135,15 +135,16 @@ function dislike(f_id) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                
+
             }
         }
     };
 
     xhr.send(
         JSON.stringify({
-            "Command": "dislike",
-            "source_id": f_id, "time": mytime
+            "command": "dislike",
+            "data": [{
+            "sourceId": f_id, "time": mytime}]
         })
     );
 
@@ -170,19 +171,21 @@ function Post_new(f_id) {
             }
         }
     };
-   
+
     //发送信息
     xhr.send(
         JSON.stringify({
+            "command": "post",
+            "data": [{
             "title": us.title, "text": us.text,
-            "source_id": us.source_id, "time": us.time
+            "sourceId": us.source_id, "time": us.time}]
         })
     );
 
-    if(!IsPC()){
+    if (!IsPC()) {
         window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
     }
-  
+
 }
 
 ///
@@ -191,14 +194,14 @@ function Post_new(f_id) {
 function IsPC() {
     var userAgentInfo = navigator.userAgent;
     var Agents = ["Android", "iPhone",
-          "SymbianOS", "Windows Phone",
-          "iPad", "iPod"];
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
     var flag = true;
     for (var v = 0; v < Agents.length; v++) {
-      if (userAgentInfo.indexOf(Agents[v]) > 0) {
-        flag = false;
-        break;
-      }
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
     }
     return flag;
-  }
+}

@@ -12,7 +12,7 @@ class response{
         if($_REQUEST['id']!=0)
         {
             $result=array(
-                "Title"=>"大家好",           
+                "title"=>"大家好",           
                 "id"=>$_REQUEST['id'],
             );
             echo json_encode($result);
@@ -21,8 +21,8 @@ class response{
         if($_REQUEST['page']==0){
 
             $result=array(
-                "AllPages"=>5,
-                "Uesr_ip"=>array("Hello World","JS"),  
+                "allPages"=>5,
+                "uesrIp"=>array("Hello World","JS"),  
             );
             echo json_encode($result);
             exit;
@@ -41,9 +41,7 @@ class response{
         }else{
             //后续添加其他格式的数据
         }
-
-     
-       
+ 
     }
     //按json格式返回数据
     public static function json($code,$message,$data=array()){
@@ -54,11 +52,11 @@ class response{
 
         if($_REQUEST['page']==1){
             $result=array(
-                "Title"=>array("大家好","那么好","tes","ds","那么好"),
+                "title"=>array("大家好","那么好","tes","ds","那么好"),
                 "text"=>array("Hello World","JS","Hello World","JS","JS"),
                 "id"=>array(12,7,9,5,8),
-                "source_id"=>array(0,12,12,7,7),
-                "user_ip"=>array("10.0.0.9","10.19.12.1","10.19.12.1","10.19.12.1","10.19.12.1"),
+                "sourceId"=>array(0,12,12,7,7),
+                "userIp"=>array("10.0.0.9","10.19.12.1","10.19.12.1","10.19.12.1","10.19.12.1"),
                 "like"=>array(10086,1113,8,7,0),
                 "dislike"=>array(98,2,5,55,0),
                 "time"=>array(32457689,1232434,5,56645,9989898),
@@ -67,11 +65,11 @@ class response{
             echo json_encode($result);
         }else{
             $result=array(
-                "Title"=>array("大好","那好"),
+                "title"=>array("大好","那好"),
                 "text"=>array("Hello World","JS"),
-                "source_id"=>array(0,0),
+                "sourceId"=>array(0,0),
                 "id"=>array(1,70),
-                "user_ip"=>array("10.0.0.9","10.19.12.1"),
+                "userIp"=>array("10.0.0.9","10.19.12.1"),
                 "like"=>array(10086,1113),
                 "dislike"=>array(98,0),
                 "time"=>array(32457689,1232434),
@@ -87,7 +85,7 @@ class response{
             return '';
         }
         $result=array(
-            "Title"=>array("大家好","那么好"),
+            "title"=>array("大家好","那么好"),
             "text"=>array("Hello World","JS"),
             "source_id"=>array(0,0),
             "user_ip"=>array("10.0.0.9","10.19.12.1"),
