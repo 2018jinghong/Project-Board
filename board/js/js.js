@@ -114,8 +114,10 @@ function like(f_id) {
     xhr.send(
         JSON.stringify({
             "command": "like",
-            "data": [
-                {"sourceId": f_id, "time": mytime}]
+            "data": {
+                "sourceId": f_id,
+                "time": mytime
+            }
         })
     );
 
@@ -143,8 +145,10 @@ function dislike(f_id) {
     xhr.send(
         JSON.stringify({
             "command": "dislike",
-            "data": [{
-            "sourceId": f_id, "time": mytime}]
+            "data": {
+                "sourceId": f_id,
+                "time": mytime
+            }
         })
     );
 
@@ -176,9 +180,12 @@ function Post_new(f_id) {
     xhr.send(
         JSON.stringify({
             "command": "post",
-            "data": [{
-            "title": us.title, "text": us.text,
-            "sourceId": us.source_id, "time": us.time}]
+            "data": {
+                "title": us.title,
+                "text": us.text,
+                "sourceId": us.source_id,
+                "time": us.time
+            }
         })
     );
 

@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>精弘</title>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./css/buttons.css">
     <link rel="stylesheet" href="./css/css.css">
 </head>
+
 <body>
     <header>
         <nav role="navigation">
@@ -27,8 +29,10 @@
                     <p class="message-text">The first message</p>
                 </div>
                 <div class="maessage-footer">
-                    <span><button class="like button button-action button-circle" onclick="love();">👍</button><span class="love_num">0</span></span>
-                    <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span class="dislike_num">0</span></span>
+                    <span><button class="like button button-action button-circle" onclick="love();">👍</button><span
+                            class="love_num">0</span></span>
+                    <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span
+                            class="dislike_num">0</span></span>
                     <button class="Comment_button button button-action button-pill" onclick="location.href='newPost.html?source='+$(this).parent().parent().attr('id')"
                         ;>Comment</button>
                     <div id="comment-container" class="comment-container">
@@ -69,4 +73,5 @@
     GetPageInfo();
     Get_data(1);
 </script>
+
 </html>
