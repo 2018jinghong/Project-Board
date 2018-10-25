@@ -46,7 +46,7 @@ function Get_data(ind) {
                 var item=data[i];
                 if (item.sourceId === 0) {
                     var v = $("#model-message").clone();//复制模板
-                    v.id = "msg_" + data.id;
+                    v.id = "msg_" + item.id;
                     v.attr("id", v.id);//修改id
                     v.find(".message-title").html(item.title);//标题
                     // v.find(".Comment-button").attr("id", v.id);//

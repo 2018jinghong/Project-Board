@@ -1,4 +1,5 @@
 <?php 
+header("Content-type: text/html;charset=utf-8");
 class msg {
 public    $title = 'this is public';
 public    $text='text';
@@ -9,8 +10,9 @@ public    $userIp='text';
 public    $like=123;
 public    $dislike=2;
 }
+
 class response{
-    public static function show($code,$message,$data=array(),$type='json'){
+    public static function show($code,$message,$type='json'){
         if($_REQUEST['id']!=0)
         {
             $result=array(
@@ -43,26 +45,53 @@ class response{
         if(!is_numeric($_REQUEST['page'])){
             return '';
         }
-        
-        if($_REQUEST['page']==1){
 
-		$array = array();
-        for($i = 1; $i < 20; $i++) {
-            $ms=new msg;
-            $ms->id=$i;
-            array_push($array, $ms);
+        $array = array();
+        $servername = "localhost";
+        $username = "user";
+        $password = "123Jhwl@zjut";
+        $dbname = "severData";
+     
+        // 创建连接
+        $conn = new mysqli($servername, $username, $password);
+         
+        // Check connection
+        if ($conn->connect_error) {
+            die("连接失败: " . $conn->connect_error);
+        } 
+       // mysql_query("set character set 'utf8'");//读库 
+        $conn->query("set names 'utf8'");//写库
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes FROM $dbname.msgData";
+        $result = $conn->query($sql);
+         
+        if ($result->num_rows > 0) {
+            // 输出数据
+            while($row = $result->fetch_assoc()) {
+                $ms=new msg;
+                $ms->id=(int)$row["id"];
+                $ms->title=$row["title"];
+                $ms->text=$row["texts"];
+                $ms->sourceId=(int)$row["sourceId"];
+                $ms->like=(int)$row["likes"];
+                $ms->dislike=(int)$row["dislikes"];
+                array_push($array, $ms);       
+            }
+        } else {
+            echo "0 结果";
+            echo $result;
         }
+        $conn->close();
+        
         $foo_json = json_encode($array);
         echo $foo_json;
 
-        }else{
-
-        }
+       
         
     }
   
     
 }
-$data=array(1,231,123465,array(9,8,'pan'));
-response::show(200,'success',$data,'json');
+
+
+response::show(200,'success','json');
 ?>
