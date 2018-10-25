@@ -18,9 +18,9 @@ function GetPageInfo() {
 //文章标题
 //
 function GetPassageTitleById(id) {
-    $.get("test.php?id=" + id, function (data, status) {
+    $.get("msg.php?id=" + id, function (data, status) {
         var data = JSON.parse(data);
-        $("#source-title").html(id + data.title);
+        $("#source-title").html(id + data[0].title);
     });
 }
 function getQueryString(name) {
@@ -38,12 +38,12 @@ function Get_data(ind) {
     $.get("datainfo.php?page=" + ind, function (data, status) {
         try {
             var data = JSON.parse(data);
-         
+
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
-            for (var i=0;i<data.length;i++) {
-                var item=data[i];
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
                 if (item.sourceId === 0) {
                     var v = $("#model-message").clone();//复制模板
                     v.id = "msg_" + item.id;
@@ -99,27 +99,26 @@ function Clean() {
 function like(f_id) {
     var myDate = new Date();
     var mytime = myDate.getTime();
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/userPost", true);//
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.setRequestHeader("kbn-version", "5.3.0");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                window.history.back();
-            }
+    $.post("postNew.php", JSON.stringify({
+        "command": "like",
+        "data": {
+            "sourceId": f_id,
+            "time": mytime
         }
-    };
-
-    xhr.send(
-        JSON.stringify({
-            "command": "like",
-            "data": {
-                "sourceId": f_id,
-                "time": mytime
+    }
+    )
+        ,
+        function (data) {
+            if (data == "200 Ok") {
+                window.history.back();
+                if (!IsPC()) {
+                  //  window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
+                }
+            } else {
+                alert("something wrong please try again");
+                alert(data);
             }
-        })
-    );
+        });
 
 }
 
@@ -130,27 +129,27 @@ function dislike(f_id) {
     var myDate = new Date();
     var mytime = myDate.getTime();
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/userPost", true);//
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.setRequestHeader("kbn-version", "5.3.0");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-
-            }
+    $.post("postNew.php", JSON.stringify({
+        "command": "dislike",
+        "data": {
+            "sourceId": f_id,
+            "time": mytime
         }
-    };
-
-    xhr.send(
-        JSON.stringify({
-            "command": "dislike",
-            "data": {
-                "sourceId": f_id,
-                "time": mytime
+    }
+    )
+        ,
+        function (data) {
+            if (data == "200 Ok") {
+                window.history.back();
+                if (!IsPC()) {
+                 //   window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
+                }
+            } else {
+                alert("something wrong please try again");
             }
-        })
-    );
+        });
+
+  
 
 }
 
@@ -164,34 +163,25 @@ function Post_new(f_id) {
 
     var us = { title: $(".title").text(), text: $(".text").text(), source_id: f_id, time: mytime };
     //准备
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "postNew.php", true);//
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.setRequestHeader("kbn-version", "5.3.0");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                window.history.back();
-            }
+    $.post("postNew.php", JSON.stringify({
+        "command": "post",
+        "data": {
+            "title": us.title,
+            "text": us.text,
+            "sourceId": us.source_id,
+            "time": us.time
         }
-    };
-
-    //发送信息
-    xhr.send(
-        JSON.stringify({
-            "command": "post",
-            "data": {
-                "title": us.title,
-                "text": us.text,
-                "sourceId": us.source_id,
-                "time": us.time
+    }),
+        function (data) {
+            if (data == "200 Ok") {
+                window.history.back();
+                if (!IsPC()) {
+                    window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
+                }
+            } else {
+                alert("something wrong please try again");
             }
-        })
-    );
-
-    if (!IsPC()) {
-        window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
-    }
+        });
 
 }
 

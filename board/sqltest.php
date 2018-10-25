@@ -1,28 +1,27 @@
 <?php
-$servername = "localhost";
-$username = "user";
-$password = "123Jhwl@zjut";
-$dbname = "severData";
-// 创建连接
-$conn = new mysqli($servername, $username, $password);
- 
-// Check connection
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
-} 
- 
-$sql = "SELECT title , texts ,id,sourceId,  FROM $dbname.msgData";
-$result = $conn->query($sql);
- 
-if ($result->num_rows > 0) {
-    // 输出数据
-    while($row = $result->fetch_assoc()) {
-        echo  $row["title"];
-        echo  $row["texts"];
-    }
-} else {
-    echo "0 结果";
-    echo $result;
-}
-$conn->close();
+ $array = array();
+ $servername = "localhost";
+ $username = "user";
+ $password = "123Jhwl@zjut";
+ $dbname = "severData";
+
+ // 创建连接
+ $conn = new mysqli($servername, $username, $password,$dbname);
+  
+ // Check connection
+ if ($conn->connect_error) {
+     die("连接失败: " . $conn->connect_error);
+ } 
+
+ $conn->query("set names 'utf8'");//写库
+ $sql = "INSERT INTO severData.msgData(title, texts, sourceId)
+         VALUES ('John', 'Doe2', 1)";
+ if ($conn->query($sql) === TRUE) {
+     echo "新记录插入成功";
+ } else {
+     echo "Error: " . $sql . "<br>" . $conn->error;
+ }
+  
+
+ $conn->close();
 ?>

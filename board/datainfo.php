@@ -45,7 +45,6 @@ class response{
         if(!is_numeric($_REQUEST['page'])){
             return '';
         }
-
         $array = array();
         $servername = "localhost";
         $username = "user";
