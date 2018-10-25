@@ -3,7 +3,7 @@
 //
 function GetPageInfo() {
     //定义
-    $.get("test.php?page=0", function (data, status) {
+    $.get("datainfo.php?page=0", function (data, status) {
         var data = JSON.parse(data);
         var v = $(".switchPage-button").clone();//复制按钮
         for (var i = 2; i <= data.allPages; i++) {
@@ -35,38 +35,38 @@ function getQueryString(name) {
 function Get_data(ind) {
     $(".spinner").show();//显示等待
     //使用get目录在test.php获得ind页的文章
-    $.get("test.php?page=" + ind, function (data, status) {
+    $.get("datainfo.php?page=" + ind, function (data, status) {
         try {
             var data = JSON.parse(data);
-
+         
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
-            for (var i = 0; i < data.count; i++) {
-                if (data.sourceId[i] === 0) {
+            for (var i=0;i<data.length;i++) {
+                var item=data[i];
+                if (item.sourceId === 0) {
                     var v = $("#model-message").clone();//复制模板
-                    v.id = "msg_" + data.id[i];
+                    v.id = "msg_" + data.id;
                     v.attr("id", v.id);//修改id
-                    v.find(".message-title").html(data.title[i]);//标题
+                    v.find(".message-title").html(item.title);//标题
                     // v.find(".Comment-button").attr("id", v.id);//
-                    v.find(".message-text").html(data.text[i]);//正文
-                    v.find(".like-num").html(data.like[i]);//赞
-                    v.find(".dislike-num").html(data.dislike[i]);//踩
+                    v.find(".message-text").html(item.text);//正文
+                    v.find(".like-num").html(item.like);//赞
+                    v.find(".dislike-num").html(item.dislike);//踩
                     v.appendTo(".message-container");
                 }
                 else {
                     var v = $("#model-comment").clone();//复制模板
-                    v.id = "msg_" + data.id[i];
+                    v.id = "msg_" + item.id;
                     v.attr("id", v.id);
-                    v.find(".message-title").html(data.title[i]);//标题
-                    v.find(".message-text").html(data.text[i]);//正文
+                    v.find(".message-title").html(item.title);//标题
+                    v.find(".message-text").html(item.text);//正文
                     //  v.find(".Comment-button").attr("id", v.id);//
-                    v.find(".like-num").html(data.like[i]);//赞
-                    v.find(".dislike-num").html(data.dislike[i]);//踩
-                    v.appendTo($("#msg_" + data.sourceId[i]).find(".comment-container")[0]);
+                    v.find(".like-num").html(item.like);//赞
+                    v.find(".dislike-num").html(item.dislike);//踩
+                    v.appendTo($("#msg_" + item.sourceId).find(".comment-container")[0]);
                     v.show();
                 }
-
             }
             $("#model-message").hide();//隐藏模板
             $("#model-comment").hide();//隐藏模板
@@ -161,7 +161,7 @@ function Post_new(f_id) {
     var us = { title: $(".title").text(), text: $(".text").text(), source_id: f_id, time: mytime };
     //准备
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/userPost", true);//
+    xhr.open("POST", "postNew.php", true);//
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.setRequestHeader("kbn-version", "5.3.0");
     xhr.onreadystatechange = function () {

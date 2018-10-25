@@ -79,42 +79,7 @@ class response{
         }
         
     }
-    //按xml格式返回数据
-    public static function xmlEncode($code,$message,$data=array()){
-        if(!is_numeric($code)){
-            return '';
-        }
-        $result=array(
-            "title"=>array("大家好","那么好"),
-            "text"=>array("Hello World","JS"),
-            "source_id"=>array(0,0),
-            "user_ip"=>array("10.0.0.9","10.19.12.1"),
-            "like"=>array(10086,1113),
-            "dislike"=>array(98,0),
-            "time"=>array(32457689,1232434),
-            "count"=>2
-        );
-        header("Content-Type:text/xml");
-        $xml="<?xml version='1.0' encoding='UTF-8'?>";
-        $xml.="<root>";
-        $xml.=self::xmlToEncode($result);
-        $xml.="</root>";
-        echo $xml;
-    }
-    public static function xmlToEncode($data){
-        $xml=$attr='';
-        foreach($data as $key=>$value){
-            if(is_numeric($key)){
-                $attr="id='{$key}'";
-                $key="item";
-            }
-            $xml.="<{$key} {$attr}>";
-            $xml.=is_array($value)?self::xmlToEncode($value):$value;
-            $xml.="</{$key}>";
-        }
-        return $xml;
-    }
-}
+    
 $data=array(1,231,123465,array(9,8,'pan'));
 response::show(200,'success',$data,'json');
 ?>
