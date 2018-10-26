@@ -13,20 +13,11 @@ public    $dislike=2;
 
 class response{
     public static function show($code,$message,$type='json'){
-        if($_REQUEST['id']!=0)
-        {
-            $result=array(
-                "title"=>"test",           
-                "id"=>$_REQUEST['id'],
-            );
-            echo json_encode($result);
-            exit;
-        }
         if($_REQUEST['page']==0){
+            //为0 返回基本信息
 
             $result=array(
-                "allPages"=>5,
-                "uesrIp"=>array("Hello World","JS"),  
+                "allPages"=>1,
             );
             echo json_encode($result);
             exit;

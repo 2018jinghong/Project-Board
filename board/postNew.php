@@ -30,7 +30,7 @@ if($com=='post'){
      $conn->close();
 
     }
-    else if($com=='like')
+    else 
     {
       $data= $resp['data']; 
       $id=(int)$data['sourceId'];
@@ -41,8 +41,10 @@ if($com=='post'){
          die("连接失败: " . $conn->connect_error);
      } 
      $conn->query("set names 'utf8'");//写库
-     $os=0;
-      $ol=$conn->query("SELECT likes FROM severData.msgData WHERE id=$id");
+     
+    if($com=='like'){
+      $os=0;
+      $ol=$conn->query("SELECT likes FROM severData.msgData WHERE id='$id'");
       if ($ol->num_rows > 0) {
         // 输出数据
         while($row = $ol->fetch_assoc()) {          
@@ -55,7 +57,25 @@ if($com=='post'){
        
        exit; 
     }
-      $result =   $conn->query("UPDATE severData.msgData SET likes=$os WHERE id=$id");//写库
+      $result =   $conn->query("UPDATE severData.msgData SET likes='$os' WHERE id='$id'");//写库
+    }else{
+      $os=0;
+      $ol=$conn->query("SELECT dislikes FROM severData.msgData WHERE id='$id'");
+      if ($ol->num_rows > 0) {
+        // 输出数据
+        while($row = $ol->fetch_assoc()) {          
+            $os=(int)$row["likes"];
+            $os=$os+1;
+            echo $os;
+            break;
+        }
+    } else {
+       
+       exit; 
+    }
+      $result =   $conn->query("UPDATE severData.msgData SET disklikes='$os' WHERE id='$id'");//写库
+
+    }
       if ($conn->query($sql) === TRUE) {
         echo "200 Ok";
       } else {
