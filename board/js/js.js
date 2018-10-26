@@ -20,7 +20,7 @@ function GetPageInfo() {
 function GetPassageTitleById(id) {
     $.get("msg.php?id=" + id, function (data, status) {
         var data = JSON.parse(data);
-        $("#source-title").html(id + data[0].title);
+        $("#source-title").html(data[0].title);
     });
 }
 function getQueryString(name) {
@@ -180,6 +180,7 @@ function Post_new(f_id) {
                 }
             } else {
                 alert("something wrong please try again");
+                alert(data);
             }
         });
 
