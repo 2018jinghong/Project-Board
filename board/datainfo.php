@@ -50,7 +50,7 @@ class response{
         } 
        // mysql_query("set character set 'utf8'");//读库 
         $conn->query("set names 'utf8'");//写库
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes FROM $dbname.msgData";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes FROM $dbname.msgData ORDER BY id DESC";
         $result = $conn->query($sql);
          
         if ($result->num_rows > 0) {
