@@ -71,6 +71,13 @@ class response{
         }
         $conn->close();
         
+        function compare_rule($x,$y){
+            if($x->id==$y->id) return 0;
+            return ($x->id>$y->id)?-1:1;
+        }
+        
+        uasort($result,'compare_rule');
+
         $foo_json = json_encode($array);
         echo $foo_json;
     }   
