@@ -1,25 +1,3 @@
-
-
-
-
-
-///summary
-///
-//
-function test(){
-//虚拟表单
-    $.ajax({
-        type:"post",
-        url:"https://aip.baidubce.com/rest/2.0/antispam/v2/spam?access_token=24.f0610ed935c0fbe92c425411f538785a.2592000.1543162321.282335-14353274",
-        data:{
-            content:"fuck"//把表单填写值放这里传到后端
-        },
-        success:function (data) {
-            console.info("返回值:",data);
-        }
-    });
-
-}
 //summary
 //用于获得页面基础信息，例如总页数
 //
