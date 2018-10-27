@@ -1,5 +1,7 @@
-﻿<!doctype html>
+﻿
+<!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>书写新的故事</title>
@@ -12,6 +14,7 @@
     <link rel="stylesheet" href="./css/css.css">
     <link rel="stylesheet" href="./css/newPost.css">
 </head>
+
 <body>
     <header>
         <nav role="navigation">
@@ -19,14 +22,13 @@
                 <img alt="logo" src="./assets/Joy.png" height="32" />
             </div>
         </nav>
-        <button class="back-home button-small button-highlight button-box button-giant button-longshadow-right button-longshadow-expand"
-            onclick="location.href='./'">🏠</button>
+        <button class="back-home button-small button-highlight button-box button-giant button-longshadow-right button-longshadow-expand" onclick="location.href='./'">🏠</button>
     </header>
     <div class="source-container">
         <h2>书写新的故事</h2>
         <h2 id="source-title"></h2>
     </div>
-    <div class="content">  
+    <div class="content">
         <div class="document">
             <div class="title page" contenteditable="true">Title</div>
             <div class="text page" contenteditable="true">
@@ -37,30 +39,29 @@
     <button class="button button-caution button-jumbo button-pill submit-button " onclick="Post();">发声📣</button>
 
     <footer>
-            <img alt="footlogo" src="./assets/footer.png" height="32" />
-            <span>留言板</span>
-            <span>Dev by CWTL</span>
+        <img alt="footlogo" src="./assets/footer.png" height="32" />
+        <span>留言板</span>
+        <span>Dev by CWTL</span>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./js/js.js"></script>
     <script>
-         if (!IsPC()) {
-               $(".submit-button").html("发声—支付宝红包🔴");
-                }
+        if (!IsPC()) {
+            $(".submit-button").html("发声—支付宝红包🔴");
+        }
         var source = getQueryString("source");
         if (source == "0") {
             $("#source-container").hide();
-        }
-        else {
+        } else {
             var id = GetPassageTitleById(source.replace("msg_", ""));
         }
+
         function Post() {
             if (source != null && source != "") {
                 if (source == "0") {
                     Post_new("0");
-                }
-                else {
+                } else {
                     Post_new(source.replace("msg_", ""));
                 }
 
@@ -69,7 +70,5 @@
             }
         }
     </script>
-
 </body>
-
 </html>

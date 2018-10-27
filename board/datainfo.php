@@ -13,11 +13,6 @@ public    $dislike=0;
 }
 
 class response{
-    // public static function compare_rule($x,$y){         //排序规则为按id倒序
-    //     if($x->id==$y->id) return 0;
-    //     return ($x->id>$y->id)?-1:1;
-    // }
-
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
@@ -77,8 +72,6 @@ class response{
         }
         $conn->close();
                 
-        // usort($array,'compare_rule'); //排序
-
         $foo_json = json_encode($array);
         echo $foo_json;
     }   
