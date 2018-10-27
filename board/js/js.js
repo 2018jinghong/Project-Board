@@ -37,11 +37,11 @@ function Get_data(ind) {
             var data = JSON.parse(data);
             console.log(data);
 
-            data.sort((x,y) => {      //按id倒序
-                return y.id - x.id;
+            data.sort((x,y) => {      //按id顺序
+                return x.id - y.id;
             });
             console.log(data);
-            
+
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
@@ -56,7 +56,7 @@ function Get_data(ind) {
                     v.find(".message-text").html(item.text);//正文
                     v.find(".like-num").html(item.like);//赞
                     v.find(".dislike-num").html(item.dislike);//踩
-                    v.appendTo(".message-container");
+                    v.prependTo(".message-container"); //倒序插入到根容器
                 }
                 else {
                     var v = $("#model-comment").clone();//复制模板
@@ -67,7 +67,7 @@ function Get_data(ind) {
                     //  v.find(".Comment-button").attr("id", v.id);//
                     v.find(".like-num").html(item.like);//赞
                     v.find(".dislike-num").html(item.dislike);//踩
-                    v.appendTo($("#msg_" + item.sourceId).find(".comment-container")[0]);
+                    v.prependTo($("#msg_" + item.sourceId).find(".comment-container")[0]);//倒序插入到评论区
                     v.show();
                 }
             }
