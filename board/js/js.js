@@ -150,7 +150,7 @@ function dislike(f_id) {
 //summary
 //用于发送新的文章
 //f_id 文章的父id 为主文章即为0
-function Post_new(f_id) {
+function postMsgTo(f_id) {
     //获得发帖数据
     var myDate = new Date();
     var mytime = myDate.getTime();
@@ -158,7 +158,7 @@ function Post_new(f_id) {
     var us = {
         title: $(".title").text(),
         text: $(".text").text(),
-        source_id: f_id,
+        sourceId: f_id,
         time: mytime
     };
     if (us.title == "Title" || us.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,.") {
@@ -168,12 +168,7 @@ function Post_new(f_id) {
     //准备
     $.post("postNew.php", JSON.stringify({
             "command": "post",
-            "data": {
-                "title": us.title,
-                "text": us.text,
-                "sourceId": us.source_id,
-                "time": us.time
-            }
+            "data": us
         }),
         function(data) {
             if (data == "200 Ok") {
