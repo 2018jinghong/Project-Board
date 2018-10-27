@@ -99,7 +99,7 @@ function Clean() {
 // command ["msg", "like", "dislike"]
 function post(command, f_id) {
     // 生成时间
-    var myTime = +new Date();
+    var myTime = + new Date();
 
     // 生成推送数据
     data = {
