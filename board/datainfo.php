@@ -1,11 +1,6 @@
 <?php 
 header("Content-type: text/html;charset=utf-8");
 
-function compare_rule($x,$y){         //排序规则为按id倒序
-    if($x->id==$y->id) return 0;
-    return ($x->id>$y->id)?-1:1;
-}
-
 class msg {
 public    $title = 'this is public';
 public    $text='text';
@@ -18,6 +13,11 @@ public    $dislike=0;
 }
 
 class response{
+    public static function compare_rule($x,$y){         //排序规则为按id倒序
+        if($x->id==$y->id) return 0;
+        return ($x->id>$y->id)?-1:1;
+    }
+
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
