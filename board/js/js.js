@@ -36,6 +36,12 @@ function Get_data(ind) {
         try {
             var data = JSON.parse(data);
             console.log(data);
+
+            data.sort((x,y) => {      //按id倒序
+                return y.id - x.id;
+            });
+            console.log(data);
+            
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
