@@ -1,7 +1,7 @@
 <?php 
 header("Content-type: text/html;charset=utf-8");
 
-function compare_rule($x,$y){
+function compare_rule($x,$y){         //排序规则为按id倒序
     if($x->id==$y->id) return 0;
     return ($x->id>$y->id)?-1:1;
 }
@@ -77,7 +77,7 @@ class response{
         }
         $conn->close();
                 
-        uasort($result,'compare_rule');
+        uasort($array,'compare_rule'); //排序
 
         $foo_json = json_encode($array);
         echo $foo_json;
