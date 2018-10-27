@@ -35,7 +35,7 @@ function Get_data(ind) {
     $.get("datainfo.php?page=" + ind, function (data, status) {
         try {
             var data = JSON.parse(data);
-
+            console.log(data);
             $("#model-comment").show();//隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
