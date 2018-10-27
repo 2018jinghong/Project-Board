@@ -1,4 +1,6 @@
 <?php
+
+
 $array = array();
 $servername = "localhost";
 $username = "user";
@@ -50,7 +52,7 @@ if($com=='post'){
         while($row = $ol->fetch_assoc()) {          
             $os=(int)$row["likes"];
             $os=$os+1;
-            echo $os;
+          //  echo $os;
             break;
         }
     } else {
@@ -66,7 +68,7 @@ if($com=='post'){
         while($row = $ol->fetch_assoc()) {          
             $os=(int)$row["likes"];
             $os=$os+1;
-            echo $os;
+            //echo $os;
             break;
         }
     } else {
