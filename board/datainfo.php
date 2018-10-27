@@ -1,5 +1,11 @@
 <?php 
 header("Content-type: text/html;charset=utf-8");
+
+function compare_rule($x,$y){
+    if($x->id==$y->id) return 0;
+    return ($x->id>$y->id)?-1:1;
+}
+
 class msg {
 public    $title = 'this is public';
 public    $text='text';
@@ -70,12 +76,7 @@ class response{
             echo $result;
         }
         $conn->close();
-        
-        function compare_rule($x,$y){
-            if($x->id==$y->id) return 0;
-            return ($x->id>$y->id)?-1:1;
-        }
-        
+                
         uasort($result,'compare_rule');
 
         $foo_json = json_encode($array);
