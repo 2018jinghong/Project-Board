@@ -1,6 +1,4 @@
 <?php
-
-
 $array = array();
 $servername = "localhost";
 $username = "user";
@@ -46,7 +44,7 @@ if($com=='post'){
      
     if($com=='like'){
       $os=0;
-      $ol=$conn->query("SELECT likes FROM severData.msgData WHERE id='$id'");
+      $ol=$conn->query("SELECT likes FROM severData.msgData WHERE id=$id");
       if ($ol->num_rows > 0) {
         // 输出数据
         while($row = $ol->fetch_assoc()) {          
@@ -59,7 +57,7 @@ if($com=='post'){
        
        exit; 
     }
-      $result =   $conn->query("UPDATE severData.msgData SET likes='$os' WHERE id='$id'");//写库
+      $result =   $conn->query("UPDATE severData.msgData SET likes='$os' WHERE id=$id");//写库
     }else{
       $os=0;
       $ol=$conn->query("SELECT dislikes FROM severData.msgData WHERE id='$id'");
@@ -75,7 +73,7 @@ if($com=='post'){
        
        exit; 
     }
-      $result =   $conn->query("UPDATE severData.msgData SET disklikes='$os' WHERE id='$id'");//写库
+      $result =   $conn->query("UPDATE severData.msgData SET disklikes='$os' WHERE id=$id");//写库
 
     }
       if ($conn->query($sql) === TRUE) {
@@ -85,8 +83,4 @@ if($com=='post'){
       }
 
     }
-
-  
-
-
 ?>

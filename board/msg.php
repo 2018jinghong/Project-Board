@@ -10,7 +10,6 @@ public    $userIp='text';
 public    $like=123;
 public    $dislike=2;
 }
-
 class response{
     public static function show($code,$message,$type='json'){
         if($_REQUEST['id']!=0)
@@ -48,17 +47,13 @@ class response{
                 echo $foo_json;
             } else {
                 echo "0 结果";
-                echo $result;
-                
+                echo $result;               
             }
             $conn->close();
             exit;
-        }
-      
+        }     
     }
-
 }
-
 
 response::show(200,'success','json');
 ?>

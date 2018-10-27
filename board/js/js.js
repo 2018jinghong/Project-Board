@@ -1,6 +1,5 @@
 //summary
 //用于获得页面基础信息，例如总页数
-//
 function GetPageInfo() {
     //定义
     $.get("datainfo.php?page=0", function (data, status) {
@@ -13,10 +12,8 @@ function GetPageInfo() {
         }
     });
 }
-
 //summary
 //文章标题
-//
 function GetPassageTitleById(id) {
     $.get("msg.php?id=" + id, function (data, status) {
         var data = JSON.parse(data);
@@ -119,7 +116,6 @@ function like(f_id) {
                 alert(data);
             }
         });
-
 }
 
 //summary
@@ -148,9 +144,6 @@ function dislike(f_id) {
                 alert("something wrong please try again");
             }
         });
-
-  
-
 }
 
 //summary
@@ -162,6 +155,10 @@ function Post_new(f_id) {
     var mytime = myDate.getTime();
 
     var us = { title: $(".title").text(), text: $(".text").text(), source_id: f_id, time: mytime };
+    if(us.title=="Title"||us.text=="Lorem ipsum dolor sit amet, consectetur adipisici elit,."){
+        alert("不合法的输入");
+        return;
+    }
     //准备
     $.post("postNew.php", JSON.stringify({
         "command": "post",

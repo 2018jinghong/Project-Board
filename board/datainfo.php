@@ -10,14 +10,34 @@ public    $userIp='text';
 public    $like=123;
 public    $dislike=2;
 }
+$servername = "localhost";
+$username = "user";
+$password = "123Jhwl@zjut";
+$dbname = "severData";
 
 class response{
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
-            //为0 返回基本信息
-
-            $result=array(
-                "allPages"=>1,
+  // 创建连接
+  $conn = new mysqli($servername, $username, $password);
+         
+  // Check connection
+  if ($conn->connect_error) {
+      die("连接失败: " . $conn->connect_error);
+  } 
+  $conn->query("set names 'utf8'");//写库
+  $sql = "SELECT COUNT(*) as total FROM  $dbname.msgData";
+  $os=1;
+  $res = $conn->query($sql);
+  if ($res->num_rows > 0) {
+    // 输出数据
+    while($row = $res->fetch_assoc()) {          
+        $os=(int)$row["total"];
+        break;
+    }
+  $conn->close();
+  $result=array(
+                "allPages"=>$os/20,
             );
             echo json_encode($result);
             exit;
@@ -37,10 +57,7 @@ class response{
             return '';
         }
         $array = array();
-        $servername = "localhost";
-        $username = "user";
-        $password = "123Jhwl@zjut";
-        $dbname = "severData";
+       
      
         // 创建连接
         $conn = new mysqli($servername, $username, $password);
