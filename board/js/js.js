@@ -171,10 +171,11 @@ function Post_new(f_id) {
     }),
         function (data) {
             if (data == "200 Ok") {
-                window.history.back();
+                
                 if (!IsPC()) {
                     window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
                 }
+                window.history.back();
             } else {
                 alert("something wrong please try again");
                 alert(data);
