@@ -77,7 +77,7 @@ class response{
         }
         $conn->close();
                 
-        // uasort($array,'compare_rule'); //排序
+        uasort($array,'compare_rule'); //排序
 
         $foo_json = json_encode($array);
         echo $foo_json;
