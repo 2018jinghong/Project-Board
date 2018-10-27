@@ -95,94 +95,68 @@ function Clean() {
     $(".spinner").show(); //显示等待
 }
 
+// 标准推送流程
+// command ["msg", "like", "dislike"]
+function post(command, f_id) {
+    // 生成时间
+    var myTime = +new Date();
+
+    // 生成推送数据
+    data = {
+        "time": myTime,
+        "sourceId": f_id
+    }
+    if (command == "msg") {
+        data.title = $(".title").text();
+        data.text = $(".text").text();
+
+        // 判断输入是否合法
+        if (us.title == "Title" || us.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,.") {
+            alert("不合法的输入");
+            return;
+        }
+    }
+
+    // 将对象转换成JSON字符串
+    var postStr = JSON.stringify({
+        "command": command,
+        "data": data
+    })
+
+    // 推送
+    $.post("postNew.php", postStr, function(data) {
+        if (data == "200 Ok") {
+            //如果是手机发帖自动支付宝红包
+            if (!IsPC()) {
+                window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");
+            }
+            window.history.back();
+        } else {
+            alert("something wrong please try again");
+            alert(data);
+        }
+    });
+}
+
 //summary
 //用于点赞
-//
+// f_id 文章的父id 为主文章即为0
 function like(f_id) {
-    var myDate = new Date();
-    var mytime = myDate.getTime();
-    $.post("postNew.php", JSON.stringify({
-            "command": "like",
-            "data": {
-                "sourceId": f_id,
-                "time": mytime
-            }
-        }),
-        function(data) {
-            if (data == "200 Ok") {
-                window.history.back();
-                if (!IsPC()) {
-                    //  window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
-                }
-            } else {
-                alert("something wrong please try again");
-                alert(data);
-            }
-        });
+    post("like", f_id);
 }
 
 //summary
 //用于点踩
-//
+// f_id 文章的父id 为主文章即为0
 function dislike(f_id) {
-    var myDate = new Date();
-    var mytime = myDate.getTime();
-
-    $.post("postNew.php", JSON.stringify({
-            "command": "dislike",
-            "data": {
-                "sourceId": f_id,
-                "time": mytime
-            }
-        }),
-        function(data) {
-            if (data == "200 Ok") {
-                window.history.back();
-                if (!IsPC()) {
-                    //   window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");//如果是手机发帖自动支付宝红包
-                }
-            } else {
-                alert("something wrong please try again");
-            }
-        });
+    post("dislike", f_id);
 }
 
 //summary
 //用于发送新的文章
-//f_id 文章的父id 为主文章即为0
+// f_id 文章的父id 为主文章即为0
 function postMsgTo(f_id) {
-    //获得发帖数据
-    var myDate = new Date();
-    var mytime = myDate.getTime();
-
-    var us = {
-        title: $(".title").text(),
-        text: $(".text").text(),
-        sourceId: f_id,
-        time: mytime
-    };
-    if (us.title == "Title" || us.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,.") {
-        alert("不合法的输入");
-        return;
-    }
-    //准备
-    $.post("postNew.php", JSON.stringify({
-            "command": "post",
-            "data": us
-        }),
-        function(data) {
-            if (data == "200 Ok") {
-
-                if (!IsPC()) {
-                    window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa"); //如果是手机发帖自动支付宝红包
-                }
-                window.history.back();
-            } else {
-                alert("something wrong please try again");
-                alert(data);
-            }
-        });
-
+    post("msg", f_id);
 }
 
 ///
