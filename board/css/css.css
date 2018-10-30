@@ -81,7 +81,7 @@ button {
 .message {
     width: 90%;
     max-width: 1600px;
-    min-width: 300px;
+    min-width: 150px;
     overflow: hidden;
     border: 1px;
     border-radius: 10px;
@@ -91,7 +91,7 @@ button {
     margin-right: auto;
     margin-top: 10px;
     margin-bottom: 15px;
-    box-shadow: 0px 5px 5px #888888;
+    box-shadow: 0px 3px 10px 5px #aaa;
 }
 
 .message-body {
