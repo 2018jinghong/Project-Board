@@ -12,8 +12,9 @@ public    $dislike=0;
 }
 $array = array();
 
-function  fetch($id,$conn){     
-            echo "<script>alert(\""+$id+"\");</script>";       
+function  fetches($id,$conn){     
+    try{
+                  
              $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
               $result2= $conn->query($sql);
              if ($result2->num_rows > 0) {
@@ -28,15 +29,15 @@ function  fetch($id,$conn){
                 $ms2->dislike=(int)$row2["dislikes"];
                 $ms2->time=(int)$row2["timess"];
                 array_push($array, $ms2);  
-                try{
-                    fetch($ms2->id,$conn);
+               
+                    fetches($ms2->id,$conn);
                 }     
-               catch(Exception $e){
-
-               }
+               
             }
         }
-    
+        catch(Exception $e){
+
+        }
     }
 
   function show($code,$message,$type='json'){
@@ -82,12 +83,12 @@ function  fetch($id,$conn){
         }
     }
 function json($code,$message,$data=array()){
-        $page=$_REQUEST['page'];
-        if(!is_numeric($page)){
-            return '';
-        }
-        try{
        
+        try{
+            $page=$_REQUEST['page'];
+            if(!is_numeric($page)){
+                return '';
+            }
         $servername = "localhost";
         $username = "user";
         $password = "123Jhwl@zjut";
@@ -138,7 +139,7 @@ function json($code,$message,$data=array()){
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);      
               
-                   fetch($ms->id,$conn);
+                   fetches($ms->id,$conn);
                 
                
             }
