@@ -36,7 +36,7 @@ if($command=='msg'){
 else if($command=='like'){
     $os=0;
     $sql="SELECT likes FROM severData.msgData WHERE id=$sourceId";
-    if ($conn->query($sql) === TRUE) {
+    $ol=$conn->query($sql);
         if ($ol->num_rows > 0) {
             // 输出数据
             while($row = $ol->fetch_assoc()) {
@@ -44,9 +44,10 @@ else if($command=='like'){
                 $os=$os+1;
                 break;
             }
+            echo "200 Ok";
         }
-        echo "200 Ok";
-    } else {
+       
+     else {
         echo $sql.$conn->error;
         exit;
     }
@@ -61,7 +62,7 @@ else if($command=='like'){
 else if($command=='dislike') {
     $os=0;
     $sql="SELECT dislikes FROM severData.msgData WHERE id=$sourceId";
-    if ($conn->query($sql) === TRUE) {
+    if ($ol=$conn->query($sql) === TRUE) {
         if ($ol->num_rows > 0) {
             // 输出数据
             while($row = $ol->fetch_assoc()) {
