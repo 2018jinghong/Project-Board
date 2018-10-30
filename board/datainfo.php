@@ -12,9 +12,8 @@ public    $dislike=0;
 }
 $array = array();
 
-class response{
-
-   public static function  fetch($id,$conn){            
+function  fetch($id,$conn){     
+    echo "<script>alert(\""+$id"\"0;</script>";       
              $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
               $result2= $conn->query($sql);
              if ($result2->num_rows > 0) {
@@ -35,7 +34,7 @@ class response{
     
     }
 
-    public static function show($code,$message,$type='json'){
+  function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
              $servername = "localhost";
@@ -77,8 +76,7 @@ class response{
             self::json($code,$message,$data);
         }
     }
-
-    public static function json($code,$message,$data=array()){
+function json($code,$message,$data=array()){
         $page=$_REQUEST['page'];
         if(!is_numeric($page)){
             return '';
@@ -144,6 +142,6 @@ class response{
         $foo_json = json_encode($array);
         echo $foo_json;
     }   
-}
-response::show(200,'success','json');
+
+show(200,'success','json');
 ?>
