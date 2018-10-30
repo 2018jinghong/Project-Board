@@ -13,7 +13,7 @@ public    $dislike=0;
 $array = array();
 
 function  fetch($id,$conn){     
-    echo "<script>alert(\""+$id"\"0;</script>";       
+            echo "<script>alert(\""+$id+"\");</script>";       
              $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
               $result2= $conn->query($sql);
              if ($result2->num_rows > 0) {
