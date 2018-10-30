@@ -86,7 +86,7 @@ function json($code,$message,$data=array()){
         if(!is_numeric($page)){
             return '';
         }
-        
+        try{
        
         $servername = "localhost";
         $username = "user";
@@ -122,7 +122,7 @@ function json($code,$message,$data=array()){
 
         $left=(int)($page-1)*10;
         $right=$left+10;
-        try{
+       
         $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -146,8 +146,9 @@ function json($code,$message,$data=array()){
             echo $result;
         }
         $conn->close();
-    } catch(Exception $e){
-        echo "<script>alert(\""+$e+"\");</script>";
+    }
+     catch(Exception $e){
+        echo $e;
     }
         $foo_json = json_encode($array);
         echo $foo_json;
