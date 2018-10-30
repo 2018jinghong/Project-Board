@@ -27,8 +27,13 @@ function  fetch($id,$conn){
                 $ms2->like=(int)$row2["likes"];
                 $ms2->dislike=(int)$row2["dislikes"];
                 $ms2->time=(int)$row2["timess"];
-                array_push($array, $ms2);       
-                fetch($ms2->id,$conn);
+                array_push($array, $ms2);  
+                try{
+                    fetch($ms2->id,$conn);
+                }     
+               catch{
+
+               }
             }
         }
     
@@ -131,8 +136,13 @@ function json($code,$message,$data=array()){
                 $ms->like=(int)$row["likes"];
                 $ms->dislike=(int)$row["dislikes"];
                 $ms->time=(int)$row["timess"];
-                array_push($array, $ms);       
-                fetch($ms->id,$conn);
+                array_push($array, $ms);      
+                try{
+                    fetch($ms->id,$conn);
+                } catch{
+                    
+                }
+               
             }
         } else {
             echo $result;
