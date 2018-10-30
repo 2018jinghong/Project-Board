@@ -92,17 +92,19 @@
 
     $("#model-message").hide(); //隐藏模板
     $("#model-comment").hide(); //隐藏模板
-
-
+    var ac = getQueryString("ac");
+    var adminCode = ac;
     if (ac == '0' || ac == '') {
         var theResponse = window.prompt("欢迎？请输入管理员密码:", "");
         adminCodeCK(theResponse);
-        var ac = getQueryString("ac");
-        var adminCode = ac;
+      
+        
         GetPageInfo();
         Get_data(1);
-        
-
+    }else{
+        adminCodeCK(theResponse);  
+      GetPageInfo();
+      Get_data(1);
     }
 
 </script>
