@@ -50,7 +50,7 @@ else if($command=='like'){
         echo $sql.$conn->error;
         exit;
     }
-    $sql="UPDATE severData.msgData SET likes='$os' WHERE id=$sourceId";
+    $sql="UPDATE severData.msgData SET likes=$os WHERE id=$sourceId";
     if ($conn->query($sql) === TRUE) {
         echo "200 Ok";
     } else {
@@ -60,7 +60,7 @@ else if($command=='like'){
 } 
 else if($command=='dislike') {
     $os=0;
-    $sql="SELECT likes FROM severData.msgData WHERE id=$sourceId";
+    $sql="SELECT dislikes FROM severData.msgData WHERE id=$sourceId";
     if ($conn->query($sql) === TRUE) {
         if ($ol->num_rows > 0) {
             // 输出数据
@@ -75,7 +75,7 @@ else if($command=='dislike') {
         echo $sql.$conn->error;
         exit;
     }
-    $sql="UPDATE severData.msgData SET dislikes='$os' WHERE id=$sourceId";
+    $sql="UPDATE severData.msgData SET dislikes=$os WHERE id=$sourceId";
     if ($conn->query($sql) === TRUE) {
         echo "200 Ok";
     } else {
