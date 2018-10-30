@@ -116,7 +116,7 @@ class response{
                 array_push($array, $ms);       
                 function fetch($id){
 
-                    $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$ms->id  ORDER BY id desc ";
+                    $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
                     $result2= $conn->query($sql);
                     if ($result2->num_rows > 0) {
                         // 输出数据
