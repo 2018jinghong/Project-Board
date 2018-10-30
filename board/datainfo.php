@@ -80,7 +80,7 @@ class response{
         } 
        // mysql_query("set character set 'utf8'");//读库 
         $conn->query("set names 'utf8'");//写库
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC limit $left,$right ";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC limit $left,$right Where sourceId=0";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // 输出数据
@@ -94,9 +94,25 @@ class response{
                 $ms->dislike=(int)$row["dislikes"];
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);       
+
+                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC Where sourceId=$ms->id";
+                $result2= $conn->query($sql);
+                if ($result2->num_rows > 0) {
+                    // 输出数据
+                    while($row2 = $result2->fetch_assoc()) {
+                        $ms2=new msg;
+                        $ms2->id=(int)$row2["id"];
+                        $ms2->title=$row2["title"];
+                        $ms2->text=$row2["texts"];
+                        $ms2->sourceId=(int)$row2["sourceId"];
+                        $ms2->like=(int)$row2["likes"];
+                        $ms2->dislike=(int)$row2["dislikes"];
+                        $ms2->time=(int)$row2["timess"];
+                        array_push($array, $ms2);       
+                    }
+                }
             }
         } else {
-            echo "0 结果";
             echo $result;
         }
         $conn->close();
