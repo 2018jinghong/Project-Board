@@ -147,12 +147,13 @@ function json($code,$message,$data=array()){
             echo $result;
         }
         $conn->close();
+        $foo_json = json_encode($array);
+        echo $foo_json;
     }
      catch(Exception $e){
         echo $e;
     }
-        $foo_json = json_encode($array);
-        echo $foo_json;
+       
     }   
 
 show(200,'success','json');
