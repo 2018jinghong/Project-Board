@@ -10,35 +10,9 @@ public    $userIp='text';
 public    $like=0;
 public    $dislike=0;
 }
-$array = array();
 
-function  fetches($id,$conn){     
-    try{
-                  
-             $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
-              $result2= $conn->query($sql);
-             if ($result2->num_rows > 0) {
-            // 输出数据
-            while($row2 = $result2->fetch_assoc()) {
-                $ms2=new msg;
-                $ms2->id=(int)$row2["id"];
-                $ms2->title=$row2["title"];
-                $ms2->text=$row2["texts"];
-                $ms2->sourceId=(int)$row2["sourceId"];
-                $ms2->like=(int)$row2["likes"];
-                $ms2->dislike=(int)$row2["dislikes"];
-                $ms2->time=(int)$row2["timess"];
-                array_push($array, $ms2);  
-               
-                    fetches($ms2->id,$conn);
-                }     
-               
-            }
-        }
-        catch(Exception $e){
 
-        }
-    }
+
 
   function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
@@ -83,8 +57,8 @@ function  fetches($id,$conn){
         }
     }
 function json($code,$message,$data=array()){
-       
-        try{
+    $array = array();
+        
             $page=$_REQUEST['page'];
             if(!is_numeric($page)){
                 return '';
@@ -128,6 +102,7 @@ function json($code,$message,$data=array()){
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // 输出数据
+            $bsd = array();
             while($row = $result->fetch_assoc()) {
                 $ms=new msg;
                 $ms->id=(int)$row["id"];
@@ -137,22 +112,45 @@ function json($code,$message,$data=array()){
                 $ms->like=(int)$row["likes"];
                 $ms->dislike=(int)$row["dislikes"];
                 $ms->time=(int)$row["timess"];
-                array_push($array, $ms);      
-              
-                   fetches($ms->id,$conn);
-                
+                array_push($array, $ms); 
+          if(! in_array($ms->id,$bsd)){
+            array_push($bsd,$ms->id);
+          }   
                
             }
         } else {
             echo $result;
         }
+        for( $i=0;$i<count($bsd);$i++){
+          $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$bsd[$i]  ORDER BY id desc ";
+          $result2= $conn->query($sql);
+             if ($result2->num_rows > 0) {
+  // 输出数据
+                 while($row2 = $result2->fetch_assoc()) {
+      $ms2=new msg;
+      $ms2->id=(int)$row2["id"];
+      $ms2->title=$row2["title"];
+      $ms2->text=$row2["texts"];
+      $ms2->sourceId=(int)$row2["sourceId"];
+      $ms2->like=(int)$row2["likes"];
+      $ms2->dislike=(int)$row2["dislikes"];
+      $ms2->time=(int)$row2["timess"];
+      array_push($array, $ms2);  
+      if(! in_array($ms2->id,$bsd)){
+        array_push($bsd,$ms2->id);
+      }  
+        
+      }     
+
+
+
+}
+      
         $conn->close();
         $foo_json = json_encode($array);
         echo $foo_json;
     }
-     catch(Exception $e){
-        echo $e;
-    }
+    
        
     }   
 
