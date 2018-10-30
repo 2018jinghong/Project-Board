@@ -47,7 +47,7 @@ class response{
             
             $conn->close();
             $result=array(
-                "allPages"=>(int)($os-1/10)+1,
+                "allPages"=>(int)(($os-1)/10)+1,
             );
             echo json_encode($result);
             exit;
@@ -80,7 +80,7 @@ class response{
         } 
        // mysql_query("set character set 'utf8'");//读库 
         $conn->query("set names 'utf8'");//写库
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC limit $left,$right Where sourceId=0";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id ASC limit $left,$right ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // 输出数据
@@ -95,7 +95,7 @@ class response{
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);       
 
-                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC Where sourceId=$ms->id";
+                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$ms->id  ORDER BY id ASC ";
                 $result2= $conn->query($sql);
                 if ($result2->num_rows > 0) {
                     // 输出数据
