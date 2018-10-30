@@ -121,35 +121,34 @@ function json($code,$message,$data=array()){
         } else {
             echo $result;
         }
-        for( $i=0;$i<count($bsd);$i++){
-          $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$bsd[$i]  ORDER BY id desc ";
-          $result2= $conn->query($sql);
-             if ($result2->num_rows > 0) {
-  // 输出数据
-                 while($row2 = $result2->fetch_assoc()) {
-      $ms2=new msg;
-      $ms2->id=(int)$row2["id"];
-      $ms2->title=$row2["title"];
-      $ms2->text=$row2["texts"];
-      $ms2->sourceId=(int)$row2["sourceId"];
-      $ms2->like=(int)$row2["likes"];
-      $ms2->dislike=(int)$row2["dislikes"];
-      $ms2->time=(int)$row2["timess"];
-      array_push($array, $ms2);  
-      if(! in_array($ms2->id,$bsd)){
-        array_push($bsd,$ms2->id);
-      }  
+//         for( $i=0;$i<count($bsd);$i++){
+//           $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$bsd[$i]  ORDER BY id desc ";
+//           $result2= $conn->query($sql);
+//              if ($result2->num_rows > 0) {
+//   // 输出数据
+//                  while($row2 = $result2->fetch_assoc()) {
+//       $ms2=new msg;
+//       $ms2->id=(int)$row2["id"];
+//       $ms2->title=$row2["title"];
+//       $ms2->text=$row2["texts"];
+//       $ms2->sourceId=(int)$row2["sourceId"];
+//       $ms2->like=(int)$row2["likes"];
+//       $ms2->dislike=(int)$row2["dislikes"];
+//       $ms2->time=(int)$row2["timess"];
+//       array_push($array, $ms2);  
+//       if(! in_array($ms2->id,$bsd)){
+//         array_push($bsd,$ms2->id);
+//       }  
         
-      }     
+//       }     
 
 
 
-}
+
       
         $conn->close();
         $foo_json = json_encode($array);
         echo $foo_json;
-    }
     
        
     }   
