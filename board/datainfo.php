@@ -122,7 +122,7 @@ function json($code,$message,$data=array()){
 
         $left=(int)($page-1)*10;
         $right=$left+10;
-
+        try{
         $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -137,18 +137,18 @@ function json($code,$message,$data=array()){
                 $ms->dislike=(int)$row["dislikes"];
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);      
-                try{
-                    fetch($ms->id,$conn);
-                } catch(Exception $e){
-
-                }
+              
+                   fetch($ms->id,$conn);
+                
                
             }
         } else {
             echo $result;
         }
         $conn->close();
-                
+    } catch(Exception $e){
+        echo "<script>alert(\""+$e+"\");</script>";
+    }
         $foo_json = json_encode($array);
         echo $foo_json;
     }   
