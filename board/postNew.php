@@ -97,7 +97,7 @@ else if($command=='del'){
         } else {
             echo $sql.$conn->error;
         }
-        echo 200 Ok;
+        echo "200 Ok";
         $conn->close();
      }else{
         echo '23333';
