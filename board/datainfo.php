@@ -47,7 +47,7 @@ class response{
             
             $conn->close();
             $result=array(
-                "allPages"=>$os/10,
+                "allPages"=>(int)($os-1/10)+1,
             );
             echo json_encode($result);
             exit;
@@ -59,9 +59,12 @@ class response{
     }
 
     public static function json($code,$message,$data=array()){
-        if(!is_numeric($_REQUEST['page'])){
+        $page=$_REQUEST['page'];
+        if(!is_numeric($page)){
             return '';
         }
+        $left=(int)($page-1)*10;
+        $right=$left+10;
         $array = array();
         $servername = "localhost";
         $username = "user";
@@ -77,7 +80,7 @@ class response{
         } 
        // mysql_query("set character set 'utf8'");//读库 
         $conn->query("set names 'utf8'");//写库
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC limit $left,$right ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // 输出数据
