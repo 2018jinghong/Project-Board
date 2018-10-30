@@ -14,19 +14,7 @@ $array = array();
 
 class response{
 
-   public static function  fetch($id){
-             
-             $servername = "localhost";
-             $username = "user";
-             $password = "123Jhwl@zjut";
-             $dbname = "severData";
-             // 创建连接
-             $conn = new mysqli($servername, $username, $password);
-              
-             // Check connection
-             if ($conn->connect_error) {
-                 die("连接失败: " . $conn->connect_error);
-             } 
+   public static function  fetch($id,$conn){            
              $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
               $result2= $conn->query($sql);
              if ($result2->num_rows > 0) {
@@ -41,7 +29,7 @@ class response{
                 $ms2->dislike=(int)$row2["dislikes"];
                 $ms2->time=(int)$row2["timess"];
                 array_push($array, $ms2);       
-                fetch($ms2->id);
+                fetch($ms2->id,$conn);
             }
         }
     
@@ -50,9 +38,6 @@ class response{
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
-
-             //为0 返回基本信息
-             $array = array();
              $servername = "localhost";
              $username = "user";
              $password = "123Jhwl@zjut";
@@ -149,7 +134,7 @@ class response{
                 $ms->dislike=(int)$row["dislikes"];
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);       
-                fetch($ms->id);
+                fetch($ms->id,$conn);
             }
         } else {
             echo $result;
