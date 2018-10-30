@@ -102,7 +102,7 @@ class response{
             $left=0;
         }
 
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id asc limit $left,$right ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // 输出数据
@@ -117,7 +117,7 @@ class response{
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);       
 
-                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$ms->id  ORDER BY id desc ";
+                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$ms->id  ORDER BY id asc ";
                 $result2= $conn->query($sql);
                 if ($result2->num_rows > 0) {
                     // 输出数据
