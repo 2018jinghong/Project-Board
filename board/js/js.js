@@ -142,21 +142,21 @@ function post(command, f_id,adminCode=0) {
 //用于点赞
 // f_id 文章的父id 为主文章即为0
 function like(f_id) {
-    post("like", f_id);
+    post("like", f_id.replace("msg_",""));
 }
 
 //summary
 //用于点踩
 // f_id 文章的父id 为主文章即为0
 function dislike(f_id) {
-    post("dislike", f_id);
+    post("dislike", f_id.replace("msg_",""));
 }
 
 //summary
 //用于删除
 // id 文章的id
 function delPost(id,adminCode) {
-    post("del", id,adminCode);
+    post("del", id.replace("msg_",""),adminCode);
 }
 //summary
 //用于发送新的文章
