@@ -1,14 +1,14 @@
 // 验证管理员密码
-function adminCodeCK($adminCode) {
+function adminCodeCK(adminCode) {
     // 将对象转换成JSON字符串
     var postStr = JSON.stringify({
-        "command": adminCode
+        "command":  adminCode
     })
 
     // 推送
     $.post("adminlogin.php", postStr, function(data) {
         if (data == "True") {
-            location.href='admin.html?ac='+$adminCode;
+            location.href='admin.html?ac='+adminCode;
         } else {
             alert("错误的密码");
             location.href='index.html';

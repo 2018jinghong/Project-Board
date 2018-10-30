@@ -1,5 +1,4 @@
-﻿
-<!doctype html>
+﻿<!doctype html>
 <html>
 
 <head>
@@ -19,7 +18,8 @@
                 <img alt="logo" src="./assets/Joy.png" height="32" />
             </div>
         </nav>
-        <button class="new-post button-small button-highlight button-box button-giant button-longshadow-right button-longshadow-expand" onclick="location.href='newPost.html?source=0'">+</button>
+        <button class="new-post button-small button-highlight button-box button-giant button-longshadow-right button-longshadow-expand"
+            onclick="location.href='newPost.html?source=0'">+</button>
     </header>
     <div class="p-container">
         <h1>我们的故事</h1>
@@ -40,8 +40,10 @@
                 </div>
                 <div>
                     <div class="message-footer">
-                        <span><button class="like button button-action button-circle" onclick="like($(this).parent().parent().parent().parent().attr('id'));">👍</button><span class="like-num">0</span></span>
-                        <span><button class="dislike button button-action button-circle" onclick="dislike($(this).parent().parent().parent().parent().attr('id'));">👎</button><span class="dislike-num">0</span></span>
+                        <span><button class="like button button-action button-circle" onclick="like($(this).parent().parent().parent().parent().attr('id'));">👍</button><span
+                                class="like-num">0</span></span>
+                        <span><button class="dislike button button-action button-circle" onclick="dislike($(this).parent().parent().parent().parent().attr('id'));">👎</button><span
+                                class="dislike-num">0</span></span>
                         <button class="Comment-button button button-action button-pill" onclick="newPost($(this)); ">见解</button>
                         <button class="del-button button button-action button-circle" onclick="delPost($(this).parent().parent().parent().attr('id'),adminCode); ">X</button>
                     </div>
@@ -55,8 +57,10 @@
                 </div>
                 <div>
                     <div class="message-footer">
-                        <span><button class="like button button-action button-circle" onclick="like($(this).parent().parent().parent().parent().attr('id'));">👍</button><span class="like-num">0</span></span>
-                        <span><button class="dislike button button-action button-circle" onclick="dislike($(this).parent().parent().parent().parent().attr('id'));">👎</button><span class="dislike-num">0</span></span>
+                        <span><button class="like button button-action button-circle" onclick="like($(this).parent().parent().parent().parent().attr('id'));">👍</button><span
+                                class="like-num">0</span></span>
+                        <span><button class="dislike button button-action button-circle" onclick="dislike($(this).parent().parent().parent().parent().attr('id'));">👎</button><span
+                                class="dislike-num">0</span></span>
                         <button class="Comment-button button button-action button-pill" onclick="newPost($(this)); ">见解</button>
                         <button class="del-button button button-action button-circle" onclick="delPost($(this).parent().parent().parent().attr('id'),adminCode); ">X</button>
                     </div>
@@ -70,10 +74,10 @@
         </div>
     </div>
     <footer>
-            <img alt="footlogo" src="./assets/footer.png" height="32" />
-            <span>Admin Mode</span>
-            <span><img alt="edge" src="./assets/edge.png" height="18" />建议使用Microsoft Edge</span>
-            <span>CWTL©2018</span>
+        <img alt="footlogo" src="./assets/footer.png" height="32" />
+        <span>Admin Mode</span>
+        <span><img alt="edge" src="./assets/edge.png" height="18" />建议使用Microsoft Edge</span>
+        <span>CWTL©2018</span>
     </footer>
     <!-- Scripts -->
     <script type="text/javascript" src="./js/js.js"></script>
@@ -84,15 +88,21 @@
     </script>
 </body>
 <script>
+
+
     $("#model-message").hide(); //隐藏模板
     $("#model-comment").hide(); //隐藏模板
-    GetPageInfo();
-    Get_data(1);
-    var ac = getQueryString("ac");
-    var adminCode=ac;
-    if(ac=='0'||ac==''){
-    var theResponse = window.prompt("欢迎？请输入管理员密码:",""); 
-    adminCodeCK(theResponse);
+
+
+    if (ac == '0' || ac == '') {
+        var theResponse = window.prompt("欢迎？请输入管理员密码:", "");
+        adminCodeCK(theResponse);
+        var ac = getQueryString("ac");
+        var adminCode = ac;
+        GetPageInfo();
+        Get_data(1);
+        
+
     }
 
 </script>
