@@ -6,7 +6,7 @@ function adminCodeCK(adminCode,isIN=false) {
     })
     // 推送
     $.post("adminlogin.php", postStr, function(data) {
-        if(isIN$&&data == "True"){
+        if(isIN&&data == "True"){
             GetPageInfo();
             Get_data(1);
         }else
