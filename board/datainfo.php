@@ -49,25 +49,24 @@ public    $dislike=0;
                 "allPages"=>(int)(($os-1)/10)+1,
             );
             echo json_encode($result);
-            exit;
+            
+        }else{
+
+            json();
         }
       
-        if($type=='json'){
-            self::json($code,$message,$data);
-        }
+       
     }
-function json($code,$message,$data=array()){
-    $array = array();
+function json(){
+   
         
-            $page=$_REQUEST['page'];
-            if(!is_numeric($page)){
-                return '';
-            }
+         $page=(int)$_REQUEST['page'];
+           
         $servername = "localhost";
         $username = "user";
         $password = "123Jhwl@zjut";
         $dbname = "severData";
-     
+        $array = array();
         // 创建连接
         $conn = new mysqli($servername, $username, $password);
          
@@ -95,7 +94,7 @@ function json($code,$message,$data=array()){
             exit;
         }
 
-        $left=(int)($page-1)*10;
+        $left=($page-1)*10;
         $right=$left+10;
        
         $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
@@ -113,7 +112,7 @@ function json($code,$message,$data=array()){
                 $ms->dislike=(int)$row["dislikes"];
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms); 
-          if(! in_array($ms->id,$bsd)){
+          if(!in_array($ms->id,$bsd)){
             array_push($bsd,$ms->id);
           }   
                
