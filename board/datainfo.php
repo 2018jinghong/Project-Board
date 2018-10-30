@@ -15,8 +15,7 @@ class response{
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
-
-             //为0 返回基本信息
+            //从数据库获得记录条数，采用Mysiam 为数据库引擎
              $array = array();
              $servername = "localhost";
              $username = "user";
@@ -63,8 +62,7 @@ class response{
         if(!is_numeric($page)){
             return '';
         }
-        $left=(int)($page-1)*10;
-        $right=$left+10;
+        
         $array = array();
         $servername = "localhost";
         $username = "user";
@@ -78,9 +76,33 @@ class response{
         if ($conn->connect_error) {
             die("连接失败: " . $conn->connect_error);
         } 
-       // mysql_query("set character set 'utf8'");//读库 
+      
         $conn->query("set names 'utf8'");//写库
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id ASC limit $left,$right ";
+
+
+        $os=0;
+        $sql="SELECT COUNT(*) FROM severData.msgData WHERE sourceId=0";
+        $ol=$conn->query($sql);
+            if ($ol->num_rows > 0) {
+                // 输出数据
+                while($row = $ol->fetch_assoc()) {
+                    $os=(int)$row["COUNT(*)"];
+                    break;
+                }
+            }
+           
+         else {
+            echo $sql.$conn->error;
+            exit;
+        }
+
+        $left=$os-10;
+        $right=$os;
+        if($left<0){
+            $left=0;
+        }
+
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // 输出数据
@@ -95,7 +117,7 @@ class response{
                 $ms->time=(int)$row["timess"];
                 array_push($array, $ms);       
 
-                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$ms->id  ORDER BY id ASC ";
+                $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$ms->id  ORDER BY id desc ";
                 $result2= $conn->query($sql);
                 if ($result2->num_rows > 0) {
                     // 输出数据
