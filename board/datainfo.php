@@ -11,27 +11,42 @@ public    $like=0;
 public    $dislike=0;
 }
 $array = array();
-function fetch($id){
-    $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
-    $result2= $conn->query($sql);
-    if ($result2->num_rows > 0) {
-        // 输出数据
-        while($row2 = $result2->fetch_assoc()) {
-            $ms2=new msg;
-            $ms2->id=(int)$row2["id"];
-            $ms2->title=$row2["title"];
-            $ms2->text=$row2["texts"];
-            $ms2->sourceId=(int)$row2["sourceId"];
-            $ms2->like=(int)$row2["likes"];
-            $ms2->dislike=(int)$row2["dislikes"];
-            $ms2->time=(int)$row2["timess"];
-            array_push($array, $ms2);       
-            fetch($ms2->id)
+
+class response{
+
+   public static function  fetch($id){
+             
+             $servername = "localhost";
+             $username = "user";
+             $password = "123Jhwl@zjut";
+             $dbname = "severData";
+             // 创建连接
+             $conn = new mysqli($servername, $username, $password);
+              
+             // Check connection
+             if ($conn->connect_error) {
+                 die("连接失败: " . $conn->connect_error);
+             } 
+             $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$id  ORDER BY id desc ";
+              $result2= $conn->query($sql);
+             if ($result2->num_rows > 0) {
+            // 输出数据
+            while($row2 = $result2->fetch_assoc()) {
+                $ms2=new msg;
+                $ms2->id=(int)$row2["id"];
+                $ms2->title=$row2["title"];
+                $ms2->text=$row2["texts"];
+                $ms2->sourceId=(int)$row2["sourceId"];
+                $ms2->like=(int)$row2["likes"];
+                $ms2->dislike=(int)$row2["dislikes"];
+                $ms2->time=(int)$row2["timess"];
+                array_push($array, $ms2);       
+                fetch($ms2->id);
+            }
         }
+    
     }
 
-}
-class response{
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
