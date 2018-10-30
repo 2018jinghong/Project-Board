@@ -137,7 +137,7 @@ function post(command, f_id,adminCode=0) {
         data.text = $(".text").text();
 
         // 判断输入是否合法
-        if (data.title == "Title" || data.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,.") {
+        if (data.title == "Title" || data.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,."||data.title=='') {
             alert("不合法的输入");
             return;
         }

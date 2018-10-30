@@ -81,7 +81,7 @@ button {
 .message {
     width: 90%;
     max-width: 1600px;
-    min-width: 150px;
+    min-width: 200px;
     overflow: hidden;
     border: 1px;
     border-radius: 10px;
@@ -127,6 +127,7 @@ button {
     display: inline;
 }
 .del-button{
+    display: inline;
     background-color: rosybrown;
 }
 
