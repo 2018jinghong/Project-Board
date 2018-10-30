@@ -97,14 +97,15 @@ function Clean() {
 
 // 标准推送流程
 // command ["msg", "like", "dislike"]
-function post(command, f_id) {
+function post(command, f_id,adminCode=0) {
     // 生成时间
     var myTime = + new Date();
 
     // 生成推送数据
     data = {
         "time": myTime,
-        "sourceId": f_id
+        "sourceId": f_id,
+        "adminCode":adminCode
     }
     if (command == "msg") {
         data.title = $(".title").text();
@@ -132,7 +133,6 @@ function post(command, f_id) {
             }
             window.history.back();
         } else {
-            alert("something wrong please try again");
             alert(data);
         }
     });
@@ -152,6 +152,12 @@ function dislike(f_id) {
     post("dislike", f_id);
 }
 
+//summary
+//用于删除
+// id 文章的id
+function delPost(id,adminCode) {
+    post("del", id,adminCode);
+}
 //summary
 //用于发送新的文章
 // f_id 文章的父id 为主文章即为0

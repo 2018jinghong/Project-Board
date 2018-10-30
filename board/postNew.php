@@ -32,42 +32,75 @@ if($command=='msg'){
         echo $sql.$conn->error;
     }
     $conn->close();
-} else {
-    if($command=='like'){
-        $os=0;
-        $ol=$conn->query("SELECT likes FROM severData.msgData WHERE id=$id");
+} 
+else if($command=='like'){
+    $os=0;
+    $sql="SELECT likes FROM severData.msgData WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
         if ($ol->num_rows > 0) {
             // 输出数据
             while($row = $ol->fetch_assoc()) {
                 $os=(int)$row["likes"];
                 $os=$os+1;
-                //  echo $os;
                 break;
             }
-        } else {
-            exit;
         }
-        $result = $conn->query("UPDATE severData.msgData SET likes='$os' WHERE id=$id");//写库
+        echo "200 Ok";
     } else {
-        $os=0;
-        $ol=$conn->query("SELECT dislikes FROM severData.msgData WHERE id='$id'");
-        if ($ol->num_rows > 0) {
-            // 输出数据
-            while($row = $ol->fetch_assoc()) {
-                $os=(int)$row["likes"];
-                $os=$os+1;
-                //echo $os;
-                break;
-            }
-        } else {
-            exit;
-        }
-        $result =   $conn->query("UPDATE severData.msgData SET disklikes='$os' WHERE id=$id");//写库
+        echo $sql.$conn->error;
+        exit;
     }
+    $sql="UPDATE severData.msgData SET likes='$os' WHERE id=$id";
     if ($conn->query($sql) === TRUE) {
         echo "200 Ok";
     } else {
         echo $sql.$conn->error;
     }
+    $conn->close();
+} 
+else if($command=='dislike') {
+    $os=0;
+    $sql="SELECT likes FROM severData.msgData WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
+        if ($ol->num_rows > 0) {
+            // 输出数据
+            while($row = $ol->fetch_assoc()) {
+                $os=(int)$row["dislikes"];
+                $os=$os+1;
+                break;
+            }
+        }
+        echo "200 Ok";
+    } else {
+        echo $sql.$conn->error;
+        exit;
+    }
+    $sql="UPDATE severData.msgData SET dislikes='$os' WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
+        echo "200 Ok";
+    } else {
+        echo $sql.$conn->error;
+    }
+    $conn->close();
+    }
+else if($command=='del'){
+    if($data['adminCode']=='yyzzs'){
+        $sql = "DELETE FROM severData.msgData WHERE id=$sourceId";
+        if ($conn->query($sql) === TRUE) {
+            echo "200 Ok";
+        } else {
+            echo $sql.$conn->error;
+        }
+        $sql = "DELETE FROM severData.msgData WHERE sourceId=$sourceId";
+        if ($conn->query($sql) === TRUE) {
+            echo "200 Ok";
+        } else {
+            echo $sql.$conn->error;
+        }
+        $conn->close();
+     }else{
+        echo '23333';
+     }   
+    } 
 }
 ?>

@@ -43,6 +43,7 @@
                         <span><button class="like button button-action button-circle" onclick="like();">👍</button><span class="like-num">0</span></span>
                         <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span class="dislike-num">0</span></span>
                         <button class="Comment-button button button-action button-pill" onclick="newPost($(this)); ">见解</button>
+                        <button class="Comment-button button button-caution button-circle button-jumbo" onclick="delPost($(this)); ">X</button>
                     </div>
                     <div class="comment-container"></div>
                 </div>
@@ -56,7 +57,8 @@
                     <div class="message-footer">
                         <span><button class="like button button-action button-circle" onclick="like();">👍</button><span class="like-num">0</span></span>
                         <span><button class="dislike button button-action button-circle" onclick="dislike();">👎</button><span class="dislike-num">0</span></span>
-                        <button class="Comment-button button button-action button-pill" onclick="newPost($(this)); ">见解</button>
+                        <button class="Comment-button button button-action button-pill" onclick="newPost($(this),adminCode); ">见解</button>
+                        <button class="Comment-button button button-caution button-circle button-jumbo" onclick="delPost($(this),adminCode); ">X</button>
                     </div>
                     <div class="comment-container"></div>
                 </div>
@@ -79,6 +81,9 @@
         function newPost(combut) {
             location.href = 'newPost.html?source=' + combut.parent().parent().parent().attr('id');
         }
+        function delPost(combut) {
+            location.href = 'newPost.html?source=' + combut.parent().parent().parent().attr('id');
+        }
     </script>
 </body>
 <script>
@@ -86,6 +91,8 @@
     $("#model-comment").hide(); //隐藏模板
     GetPageInfo();
     Get_data(1);
+    var ac = getQueryString("ac");
+    var adminCode=ac;
 </script>
 
 </html>
