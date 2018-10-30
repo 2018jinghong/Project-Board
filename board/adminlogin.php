@@ -7,8 +7,8 @@ $dbname = "severData";
 
 $resp = file_get_contents('php://input');
 $resp=json_decode($resp,true);
-$command= $resp['pass'];
-if($command=="yyzzs"){
+$command= $resp['command'];
+if($command=='yyzzs'){
     echo "True";
 }else{
     echo "No";

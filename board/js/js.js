@@ -2,7 +2,7 @@
 function adminCodeCK($adminCode) {
     // 将对象转换成JSON字符串
     var postStr = JSON.stringify({
-        "pass": adminCode
+        "command": adminCode
     })
 
     // 推送

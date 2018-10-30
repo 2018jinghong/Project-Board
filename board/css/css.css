@@ -126,6 +126,9 @@ button {
 .Comment-button {
     display: inline;
 }
+.del-button{
+    background-color: rosybrown;
+}
 
 footer {
     position: fixed;
