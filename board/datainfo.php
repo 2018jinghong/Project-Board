@@ -31,7 +31,7 @@ function  fetch($id,$conn){
                 try{
                     fetch($ms2->id,$conn);
                 }     
-               catch{
+               catch(Exception $e){
 
                }
             }
@@ -139,8 +139,8 @@ function json($code,$message,$data=array()){
                 array_push($array, $ms);      
                 try{
                     fetch($ms->id,$conn);
-                } catch{
-                    
+                } catch(Exception $e){
+
                 }
                
             }
