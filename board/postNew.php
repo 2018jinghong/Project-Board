@@ -25,7 +25,8 @@ $sourceId=(int)$data['sourceId'];
 if($command=='msg'){
     $title=$data['title'];
     $text=$data['text'];
-    $sql = "INSERT INTO severData.msgData(title,texts,sourceId) VALUES ('$title','$text','$sourceId')";
+    $time=$data['time'];
+    $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess) VALUES ('$title','$text','$sourceId',$time)";
     if ($conn->query($sql) === TRUE) {
         echo "200 Ok";
     } else {

@@ -1,6 +1,5 @@
 <?php 
 header("Content-type: text/html;charset=utf-8");
-
 class msg {
 public    $title = 'this is public';
 public    $text='text';
@@ -16,15 +15,42 @@ class response{
     public static function show($code,$message,$type='json'){
         if($_REQUEST['page']==0){
             //为0 返回基本信息
+
+             //为0 返回基本信息
+             $array = array();
+             $servername = "localhost";
+             $username = "user";
+             $password = "123Jhwl@zjut";
+             $dbname = "severData";
+             // 创建连接
+             $conn = new mysqli($servername, $username, $password);
+              
+             // Check connection
+             if ($conn->connect_error) {
+                 die("连接失败: " . $conn->connect_error);
+             } 
+             $os=0;
+             $sql="SELECT COUNT(*) FROM severData.msgData WHERE sourceId=0";
+             $ol=$conn->query($sql);
+                 if ($ol->num_rows > 0) {
+                     // 输出数据
+                     while($row = $ol->fetch_assoc()) {
+                         $os=(int)$row["COUNT(*)"];
+                         break;
+                     }
+                 }
+                
+              else {
+                 echo $sql.$conn->error;
+                 exit;
+             }
+            
+            $conn->close();
             $result=array(
-                "allPages"=>2,
+                "allPages"=>$os/10,
             );
             echo json_encode($result);
             exit;
-        }
-       
-        if(!is_numeric($code)){
-            return '';
         }
       
         if($type=='json'){
@@ -51,9 +77,8 @@ class response{
         } 
        // mysql_query("set character set 'utf8'");//读库 
         $conn->query("set names 'utf8'");//写库
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes FROM $dbname.msgData ORDER BY id ASC";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData ORDER BY id ASC";
         $result = $conn->query($sql);
-         
         if ($result->num_rows > 0) {
             // 输出数据
             while($row = $result->fetch_assoc()) {
@@ -64,6 +89,7 @@ class response{
                 $ms->sourceId=(int)$row["sourceId"];
                 $ms->like=(int)$row["likes"];
                 $ms->dislike=(int)$row["dislikes"];
+                $ms->time=(int)$row["timess"];
                 array_push($array, $ms);       
             }
         } else {
