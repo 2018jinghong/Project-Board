@@ -77,16 +77,18 @@ button {
     margin-left: auto;
     margin-right: auto;
 }
-
+.message-time{
+    margin-right: 10px;
+}
 .message {
     width: 90%;
     max-width: 1600px;
     min-width: 200px;
     overflow: hidden;
-    border: 1px;
+    border: 0.5px;
     border-radius: 10px;
     border-style: solid;
-    border-color: rgb(170, 175, 170);
+    border-color: rgb(211, 211, 211);
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;

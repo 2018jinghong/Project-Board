@@ -77,7 +77,9 @@ function Get_data(ind) {
                     v.id = "msg_" + item.id;
                     v.attr("id", v.id); //修改id
                     v.find(".message-title").html(item.title); //标题
-                    // v.find(".Comment-button").attr("id", v.id);//
+                    var myTime =  new Date();
+                    myTime.setTime(item.time);
+                    v.find(".message-time").html(myTime.format("MM-dd hh:mm")); //时间
                     v.find(".message-text").html(item.text); //正文
                     v.find(".like-num").html(item.like); //赞
                     v.find(".dislike-num").html(item.dislike); //踩
@@ -88,7 +90,9 @@ function Get_data(ind) {
                     v.attr("id", v.id);
                     v.find(".message-title").html(item.title); //标题
                     v.find(".message-text").html(item.text); //正文
-                    //  v.find(".Comment-button").attr("id", v.id);//
+                    var myTime =  new Date();
+                    myTime.setTime(item.time);
+                    v.find(".message-time").html(myTime.format("MM-dd hh:mm")); //时间
                     v.find(".like-num").html(item.like); //赞
                     v.find(".dislike-num").html(item.dislike); //踩
                     v.prependTo($("#msg_" + item.sourceId).find(".comment-container")[0]); //倒序插入到评论区
@@ -125,7 +129,6 @@ function Clean() {
 function post(command, f_id,adminCode=0) {
     // 生成时间
     var myTime = + new Date();
-
     // 生成推送数据
     data = {
         "time": myTime,
@@ -135,14 +138,12 @@ function post(command, f_id,adminCode=0) {
     if (command == "msg") {
         data.title = $(".title").text();
         data.text = $(".text").text();
-
         // 判断输入是否合法
         if (data.title == "Title" || data.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,."||data.title=='') {
             alert("不合法的输入");
             return;
         }
     }
-
     // 将对象转换成JSON字符串
     var postStr = JSON.stringify({
         "command": command,

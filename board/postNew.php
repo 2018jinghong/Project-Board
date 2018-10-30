@@ -101,7 +101,7 @@ else if($command=='del'){
         echo "200 Ok";
         $conn->close();
      }else{
-        echo '23333';
+        echo '想破解，没门';
      }   
     } 
 

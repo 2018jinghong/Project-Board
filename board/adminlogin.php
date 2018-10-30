@@ -1,4 +1,5 @@
 <?php
+//用于验证管理员密码
 $array = array();
 $servername = "localhost";
 $username = "user";
