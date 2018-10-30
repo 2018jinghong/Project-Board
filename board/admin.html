@@ -97,14 +97,9 @@
     if (ac == '0' || ac == '') {
         var theResponse = window.prompt("欢迎？请输入管理员密码:", "");
         adminCodeCK(theResponse);
-      
-        
-        GetPageInfo();
-        Get_data(1);
     }else{
-        adminCodeCK(theResponse);  
-      GetPageInfo();
-      Get_data(1);
+        adminCodeCK(adminCode),true;  
+       
     }
 
 </script>
