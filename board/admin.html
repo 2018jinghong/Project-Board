@@ -98,7 +98,10 @@
     var adminCode = ac;
     if (ac == '0' || ac == '') {
         var theResponse = window.prompt("欢迎？请输入管理员密码:", "");
-        adminCodeCK(theResponse);
+        if(theResponse==null){
+            location.href='index.html';
+           }else{
+        adminCodeCK(theResponse);}
     }else{
         adminCodeCK(adminCode,true);  
        
