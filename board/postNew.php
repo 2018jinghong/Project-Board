@@ -56,7 +56,7 @@ if ($command=='msg') {
     $time=$data['time'];
     $ip=getIP();
     if(check($title)==0&&check($text)==0){
-    $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess,ip) VALUES ('$title','$text','$sourceId',$time,'$ip'";
+    $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess,ip) VALUES ('$title','$text','$sourceId',$time,'$ip')";
     if ($conn->query($sql) === true) {
         echo "200 Ok";
     } else {
