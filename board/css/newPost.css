@@ -12,7 +12,11 @@
     margin-top: 70px;
     margin-bottom: 60px;
 }
-
+.document h2{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
 .submit-button {
     display: block;
     margin: auto;
