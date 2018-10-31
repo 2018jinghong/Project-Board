@@ -4,6 +4,7 @@ class msg
 {
     public $title = 'this is public';
     public $text='text';
+    public $ip='';
     public $id = 1;
     public $sourceId=0;
     public $time = 32457689;
@@ -85,7 +86,7 @@ function json()
     $left=($page-1)*10;
     $right=$left+10;
 
-    $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
+    $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess,ip FROM $dbname.msgData Where sourceId=0 ORDER BY id desc limit $left,$right ";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // 输出数据
@@ -93,6 +94,7 @@ function json()
         while ($row = $result->fetch_assoc()) {
             $ms=new msg;
             $ms->id=(int)$row["id"];
+            $ms->ip=$row["ip"];
             $ms->title=$row["title"];
             $ms->text=$row["texts"];
             $ms->sourceId=(int)$row["sourceId"];
@@ -108,13 +110,14 @@ function json()
         echo $result;
     }
     for ($i=0;$i<count($bsd);$i++) {
-        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess FROM $dbname.msgData Where sourceId=$bsd[$i]  ORDER BY id desc ";
+        $sql = "SELECT title, texts ,id,sourceId,likes,dislikes,timess,ip FROM $dbname.msgData Where sourceId=$bsd[$i]  ORDER BY id desc ";
         $result2= $conn->query($sql);
         if ($result2->num_rows > 0) {
             // 输出数据
             while ($row2 = $result2->fetch_assoc()) {
                 $ms2=new msg;
                 $ms2->id=(int)$row2["id"];
+                $ms2->ip=$row["ip"];
                 $ms2->title=$row2["title"];
                 $ms2->text=$row2["texts"];
                 $ms2->sourceId=(int)$row2["sourceId"];

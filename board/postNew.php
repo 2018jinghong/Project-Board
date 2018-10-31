@@ -13,7 +13,17 @@ function check($words){
     return  $result['result']['spam'];
 
 }
-
+function getIP(){
+    global $ip;
+    if (getenv("HTTP_CLIENT_IP"))
+    $ip = getenv("HTTP_CLIENT_IP");
+    else if(getenv("HTTP_X_FORWARDED_FOR"))
+    $ip = getenv("HTTP_X_FORWARDED_FOR");
+    else if(getenv("REMOTE_ADDR"))
+    $ip = getenv("REMOTE_ADDR");
+    else $ip = "Unknow";
+    return $ip;
+    }
 $array = array();
 ///数据库信息
 $servername = "localhost";
@@ -44,8 +54,9 @@ if ($command=='msg') {
     $title=$data['title'];
     $text=$data['text'];
     $time=$data['time'];
+    $ip=getIP();
     if(check($title)==0&&check($text)==0){
-    $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess) VALUES ('$title','$text','$sourceId',$time)";
+    $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess,ip) VALUES ('$title','$text','$sourceId',$time,'$ip'";
     if ($conn->query($sql) === true) {
         echo "200 Ok";
     } else {

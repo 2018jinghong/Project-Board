@@ -80,6 +80,9 @@ function Get_data(ind) {
                     var myTime =  new Date();
                     myTime.setTime(item.time);
                     v.find(".message-time").html(myTime.Format("MM.dd hh:mm")); //时间
+                    var userIP = returnCitySN[item.ip];
+                    v.find(".message-ip").html(userIP ); //正文
+              
                     v.find(".message-text").html(item.text); //正文
                     v.find(".like-num").html(item.like); //赞
                     v.find(".dislike-num").html(item.dislike); //踩
@@ -90,6 +93,8 @@ function Get_data(ind) {
                     v.attr("id", v.id);
                     v.find(".message-title").html(item.title); //标题
                     v.find(".message-text").html(item.text); //正文
+                    var userIP = returnCitySN[item.ip];
+                    v.find(".message-ip").html(userIP ); //正文
                     var myTime =  new Date();
                     myTime.setTime(item.time);
                     v.find(".message-time").html(myTime.Format("MM.dd hh:mm")); //时间
