@@ -81,7 +81,7 @@ function Get_data(ind) {
                     myTime.setTime(item.time);
                     v.find(".message-time").html(myTime.Format("MM.dd hh:mm")); //时间
 
-                    $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+item.ip, function(_result){  
+                    $.get('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+item.ip, function(_result){  
                         v.find(".message-ip").html(remote_ip_info );   
                 });
                
@@ -97,7 +97,7 @@ function Get_data(ind) {
                     v.attr("id", v.id);
                     v.find(".message-title").html(item.title); //标题
                     v.find(".message-text").html(item.text); //正文
-                    $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+item.ip, function(_result){  
+                    $.get('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+item.ip, function(_result){  
                         v.find(".message-ip").html(remote_ip_info );   
                 });
                
