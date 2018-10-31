@@ -79,7 +79,7 @@ function Get_data(ind) {
                     v.find(".message-title").html(item.title); //标题
                     var myTime =  new Date();
                     myTime.setTime(item.time);
-                    v.find(".message-time").html(myTime.Format("MM-dd hh:mm")); //时间
+                    v.find(".message-time").html(myTime.Format("MM.dd hh:mm")); //时间
                     v.find(".message-text").html(item.text); //正文
                     v.find(".like-num").html(item.like); //赞
                     v.find(".dislike-num").html(item.dislike); //踩
@@ -92,7 +92,7 @@ function Get_data(ind) {
                     v.find(".message-text").html(item.text); //正文
                     var myTime =  new Date();
                     myTime.setTime(item.time);
-                    v.find(".message-time").html(myTime.Format("MM-dd hh:mm")); //时间
+                    v.find(".message-time").html(myTime.Format("MM.dd hh:mm")); //时间
                     v.find(".like-num").html(item.like); //赞
                     v.find(".dislike-num").html(item.dislike); //踩
                     v.prependTo($("#msg_" + item.sourceId).find(".comment-container")[0]); //倒序插入到评论区
