@@ -1,10 +1,14 @@
 <?php
+
+
 $array = array();
+///数据库信息
 $servername = "localhost";
 $username = "user";
 $password = "123Jhwl@zjut";
 $dbname = "severData";
 
+///获取post
 $resp = file_get_contents('php://input');
 $resp=json_decode($resp, true);
 $command= $resp['command'];
@@ -95,5 +99,4 @@ if ($command=='msg') {
         echo '想破解，没门';
      }   
     } 
-
 ?>
