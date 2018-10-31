@@ -34,7 +34,7 @@ function request_post($url = '', $param = '') {
     var_dump($res);
     $resp=json_decode($res, true);
 
-    $url = 'https://aip.baidubce.com/rest/2.0/antispam/v2/spam?access_token='+$resp["?access_token"];
+    $url = 'https://aip.baidubce.com/rest/2.0/antispam/v2/spam?access_token='+$resp["access_token"];
     $post_datax['content']  = 'fuck';
 
     $res = request_post($url, $post_datax);
