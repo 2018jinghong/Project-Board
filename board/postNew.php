@@ -1,5 +1,18 @@
 <?php
+function check($words){
 
+    require_once 'aiSDK/AipImageCensor.php';
+
+    // 你的 APPID AK SK
+    const APP_ID = '14353274';
+    const API_KEY = 'wtDLUNvcuTfAGygEqGDc9PMQ';
+    const SECRET_KEY = 'm5KeOPj9feTbCxDpYCsaXW7BjCxYPYoq';
+    
+    $client = new AipImageCensor(APP_ID, API_KEY, SECRET_KEY);
+    $result =$client->antiSpam($words);
+    return  $result['result']['spam'];
+
+}
 
 $array = array();
 ///数据库信息
@@ -27,15 +40,20 @@ $sourceId=(int)$data['sourceId'];
 
 // 判断命令
 if ($command=='msg') {
+   
     $title=$data['title'];
     $text=$data['text'];
     $time=$data['time'];
+    if(check($title)==0&&check($text)==0){
     $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess) VALUES ('$title','$text','$sourceId',$time)";
     if ($conn->query($sql) === true) {
         echo "200 Ok";
     } else {
         echo $sql.$conn->error;
     }
+}else{
+    echo "内容包括违法内容或灌水";
+}
     $conn->close();
 } elseif ($command=='like') {
     $os=0;
