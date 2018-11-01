@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="./css/buttons.css">
     <link rel="stylesheet" href="./css/css.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/js.js"></script>
+    <script>
+        $("#model-message").hide(); //隐藏模板
+        $("#model-comment").hide(); //隐藏模板
+        GetPageInfo();
+        Get_data(1);
+    </script>
 </head>
 
 <body>
@@ -86,18 +93,13 @@
     <!-- Scripts -->
     <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 
-    <script type="text/javascript" src="./js/js.js"></script>
+ 
     <script type="text/javascript">
         function newPost(combut) {
             location.href = 'newPost.html?source=' + combut.parent().parent().parent().attr('id');
         }
     </script>
 </body>
-<script>
-    $("#model-message").hide(); //隐藏模板
-    $("#model-comment").hide(); //隐藏模板
-    GetPageInfo();
-    Get_data(1);
-</script>
+
 
 </html>

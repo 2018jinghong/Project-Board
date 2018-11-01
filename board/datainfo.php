@@ -17,7 +17,7 @@ function show($code, $message, $type='json')
 {
     if ($_REQUEST['page']==0) {
         //为0 返回基本信息
-        $servername = "localhost";
+        $servername = "132.232.120.208";
         $username = "user";
         $password = "123Jhwl@zjut";
         $dbname = "severData";

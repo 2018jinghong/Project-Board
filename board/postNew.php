@@ -28,7 +28,7 @@ function getIP()
 }
 $array = array();
 ///数据库信息
-$servername = "localhost";
+$servername = "132.232.120.208";
 $username = "user";
 $password = "123Jhwl@zjut";
 $dbname = "severData";

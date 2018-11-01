@@ -1,7 +1,7 @@
 <?php
 //用于验证管理员密码
 $array = array();
-$servername = "localhost";
+$servername = "132.232.120.208";
 $username = "user";
 $password = "123Jhwl@zjut";
 $dbname = "severData";

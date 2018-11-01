@@ -17,12 +17,9 @@ function adminCodeCK(adminCode,isIN=false) {
                 alert("错误的密码");
                 location.href='admin.html?ac=0';
             }
-        }
-        
+        }  
     });
 }
-
-
 //summary
 //用于获得页面基础信息，例如总页数
 function GetPageInfo() {
@@ -66,7 +63,6 @@ function Get_data(ind) {
             data.sort((x, y) => { //按id顺序
                 return x.id - y.id;
             });
-
             $("#model-comment").show(); //隐藏模板
             $("#model-message").show();
             //将文章添加到DOM
@@ -80,13 +76,10 @@ function Get_data(ind) {
                     var myTime =  new Date();
                     myTime.setTime(item.time);
                     v.find(".message-time").html(myTime.Format("MM.dd hh:mm")); //时间
-
                     $.get('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='+item.ip, function(_result){  
                         v.find(".message-ip").html(remote_ip_info );   
                 });
-               
-                   
-              
+
                     v.find(".message-text").html(item.text); //正文
                     v.find(".like-num").html(item.like); //赞
                     v.find(".dislike-num").html(item.dislike); //踩
@@ -116,7 +109,6 @@ function Get_data(ind) {
         } catch (e) {
 
         }
-
         $(".spinner").hide(); //隐藏等待
     });
 }
@@ -170,7 +162,7 @@ function post(command, f_id,adminCode=0) {
     }
     if (command == "msg") {
         data.title = $(".title").text();
-        data.text = $(".text").text();
+        data.text = $(".text").html();
         // 判断输入是否合法
         if (data.title == "Title" || data.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,."||data.title=='') {
             alert("不合法的输入");
