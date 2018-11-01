@@ -19,7 +19,7 @@ body {
 }
 
 header {
-    background-color:#eee7;
+    background-color: #eee7;
     box-shadow: 0px 5px 5px #888888;
     position: fixed;
     top: 0;
@@ -34,11 +34,10 @@ header {
     height: 40px;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    
 }
 
 button {
-    box-shadow: 0px 5px 5px #888888;
+    box-shadow: 0px 5px 5px #888;
 }
 
 .logo {
@@ -73,27 +72,23 @@ button {
     -webkit-align-items: center;
     align-items: center;
     width: 70%;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 50px auto 20px auto;
 }
-.message-time{
+
+.message-time {
     margin-right: 10px;
 }
+
 .message {
     width: 90%;
     max-width: 1600px;
     min-width: 200px;
     overflow: hidden;
-    border: 0px;
+    /* border: 0px; */
     border-radius: 5px;
     /* border-style: solid; */
-    border-color: rgb(211, 211, 211);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    /* border-color: rgb(211, 211, 211); */
+    margin: 10px auto 5px auto;
     box-shadow: 0px 3px 15px #aaa;
 }
 
@@ -128,18 +123,19 @@ button {
 } */
 .Comment-button {
     display: inline;
-    white-space:nowrap;
+    white-space: nowrap;
 }
-.del-button{
+
+.del-button {
     display: inline;
     background-color: rosybrown;
 }
 
 footer {
-    background-color:#eee7;
+    background-color: #eee7;
     position: fixed;
     bottom: 0;
-    left: 0;
+    /* left  : 0; */
     display: -webkit-flex;
     display: flex;
     justify-content: space-between;
@@ -149,7 +145,6 @@ footer {
     height: 50px;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    
 }
 
 footer span {

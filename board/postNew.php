@@ -1,29 +1,31 @@
 <?php
-function check($words){
-
+function check($words)
+{
     require_once 'aiSDK/AipImageCensor.php';
 
     // 你的 APPID AK SK
     $APP_ID = '14353274';
     $API_KEY = 'wtDLUNvcuTfAGygEqGDc9PMQ';
     $SECRET_KEY = 'm5KeOPj9feTbCxDpYCsaXW7BjCxYPYoq';
-    
+
     $client = new AipImageCensor($APP_ID, $API_KEY, $SECRET_KEY);
     $result =$client->antiSpam($words);
     return  $result['result']['spam'];
-
 }
-function getIP(){
+function getIP()
+{
     global $ip;
-    if (getenv("HTTP_CLIENT_IP"))
-    $ip = getenv("HTTP_CLIENT_IP");
-    else if(getenv("HTTP_X_FORWARDED_FOR"))
-    $ip = getenv("HTTP_X_FORWARDED_FOR");
-    else if(getenv("REMOTE_ADDR"))
-    $ip = getenv("REMOTE_ADDR");
-    else $ip = "Unknow";
-    return $ip;
+    if (getenv("HTTP_CLIENT_IP")) {
+        $ip = getenv("HTTP_CLIENT_IP");
+    } elseif (getenv("HTTP_X_FORWARDED_FOR")) {
+        $ip = getenv("HTTP_X_FORWARDED_FOR");
+    } elseif (getenv("REMOTE_ADDR")) {
+        $ip = getenv("REMOTE_ADDR");
+    } else {
+        $ip = "Unknow";
     }
+    return $ip;
+}
 $array = array();
 ///数据库信息
 $servername = "localhost";
@@ -50,21 +52,20 @@ $sourceId=(int)$data['sourceId'];
 
 // 判断命令
 if ($command=='msg') {
-   
     $title=$data['title'];
     $text=$data['text'];
     $time=$data['time'];
     $ip=getIP();
-    if(check($title)==0&&check($text)==0){
-    $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess,ip) VALUES ('$title','$text','$sourceId',$time,'$ip')";
-    if ($conn->query($sql) === true) {
-        echo "200 Ok";
+    if (check($title)==0&&check($text)==0) {
+        $sql = "INSERT INTO severData.msgData(title,texts,sourceId,timess,ip) VALUES ('$title','$text','$sourceId',$time,'$ip')";
+        if ($conn->query($sql) === true) {
+            echo "200 Ok";
+        } else {
+            echo $sql.$conn->error;
+        }
     } else {
-        echo $sql.$conn->error;
+        echo "内容包括违法内容或灌水";
     }
-}else{
-    echo "内容包括违法内容或灌水";
-}
     $conn->close();
 } elseif ($command=='like') {
     $os=0;
@@ -124,8 +125,7 @@ if ($command=='msg') {
         }
         echo "200 Ok";
         $conn->close();
-     }else{
+    } else {
         echo '想破解，没门';
-     }   
-    } 
-?>
+    }
+}
