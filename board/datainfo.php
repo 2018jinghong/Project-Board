@@ -67,7 +67,7 @@ function json()
         die("连接失败: " . $conn->connect_error);
     }
     // mysql_query("set character set 'utf8'");//读库
-    $conn->query("set names 'utf8'");//写库
+    // $conn->query("set names 'utf8'");//写库
 
     $os=0;
     $sql="SELECT COUNT(*) FROM severData.msgData WHERE sourceId=0";

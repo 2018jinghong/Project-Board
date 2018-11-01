@@ -43,7 +43,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
 }
-$conn->query("set names 'utf8mb4'");
+// $conn->query("set names 'utf8mb4'");
 
 $data= $resp['data'];
 $sourceId=(int)$data['sourceId'];

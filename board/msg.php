@@ -30,7 +30,7 @@ class response
                 die("连接失败: " . $conn->connect_error);
             }
             // mysql_query("set character set 'utf8'");//读库
-            $conn->query("set names 'utf8'");//写库
+            // $conn->query("set names 'utf8'");//写库
 
             $result =   $conn->query("SELECT title,id,texts,sourceId,likes,dislikes FROM severData.msgData WHERE id=$id");//写库
             if ($result->num_rows > 0) {
