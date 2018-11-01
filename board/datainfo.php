@@ -54,7 +54,7 @@ function json()
 {
     $page=(int)$_REQUEST['page'];
 
-    $servername = "localhost";
+    $servername = "132.232.120.208";
     $username = "user";
     $password = "123Jhwl@zjut";
     $dbname = "severData";
