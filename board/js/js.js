@@ -63,13 +63,17 @@ function Get_data(ind) {
             data.sort((x, y) => { //按id顺序
                 return x.id - y.id;
             });
-            $("#model-comment").show(); //隐藏模板
-            $("#model-message").show();
+           
             //将文章添加到DOM
             for (var i = 0; i < data.length; i++) {
+
                 var item = data[i];
                 if (item.sourceId === 0) {
+                    //隐藏模板
+                    $("#model-message").show();
                     var v = $("#model-message").clone(); //复制模板
+                    $("#model-message").hide(); //隐藏模板
+                    
                     v.id = "msg_" + item.id;
                     v.attr("id", v.id); //修改id
                     v.find(".message-title").html(item.title); //标题
@@ -85,7 +89,9 @@ function Get_data(ind) {
                     v.find(".dislike-num").html(item.dislike); //踩
                     v.prependTo(".message-container"); //倒序插入到根容器
                 } else {
+                    $("#model-comment").show(); 
                     var v = $("#model-comment").clone(); //复制模板
+                    $("#model-comment").hide(); //隐藏模板
                     v.id = "msg_" + item.id;
                     v.attr("id", v.id);
                     v.find(".message-title").html(item.title); //标题
@@ -103,8 +109,7 @@ function Get_data(ind) {
                     v.show();
                 }
             }
-            $("#model-message").hide(); //隐藏模板
-            $("#model-comment").hide(); //隐藏模板
+           
             // $(".message-container").load("model.html .message")
         } catch (e) {
 
@@ -161,8 +166,8 @@ function post(command, f_id,adminCode=0) {
         "adminCode":adminCode
     }
     if (command == "msg") {
-        data.title = $(".title").text();
-        data.text = $(".text").html();
+        data.title = $(".title").text().replace("\'","\'\'").replace("\"","\"\"");
+        data.text = $(".text").html().replace("\'","\'\'").replace("\"","\"\"");
         // 判断输入是否合法
         if (data.title == "Title" || data.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,."||data.title=='') {
             alert("不合法的输入");
