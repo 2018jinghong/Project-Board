@@ -188,10 +188,11 @@ function post(command, f_id,adminCode=0) {
         if (data == "200 Ok") {
             //如果是手机发帖自动支付宝红包
             if(command=="msg"){
-                window.history.back();
                 if (!IsPC()) {
                     window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");
                 }
+                window.history.back();
+                window.location.reload();
             }else{
                 window.location.reload();
             }
