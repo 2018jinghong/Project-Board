@@ -100,7 +100,7 @@ function json()
             $ms->sourceId=(int)$row["sourceId"];
             $ms->like=(int)$row["likes"];
             $ms->dislike=(int)$row["dislikes"];
-            $ms->time=(int)$row["timess"];
+            $ms->time=$row["timess"];
             array_push($array, $ms);
             if (!in_array($ms->id, $bsd)) {
                 array_push($bsd, $ms->id);
@@ -123,7 +123,7 @@ function json()
                 $ms2->sourceId=(int)$row2["sourceId"];
                 $ms2->like=(int)$row2["likes"];
                 $ms2->dislike=(int)$row2["dislikes"];
-                $ms2->time=(int)$row2["timess"];
+                $ms2->time=$row2["timess"];
                 array_push($array, $ms2);
                 if (! in_array($ms2->id, $bsd)) {
                     array_push($bsd, $ms2->id);
