@@ -166,8 +166,8 @@ function post(command, f_id,adminCode=0) {
         "adminCode":adminCode
     }
     if (command == "msg") {
-        data.title = $(".title").text().replace("\'","\'\'").replace("\"","\"\"");
-        data.text = $(".text").html().replace("\'","\'\'").replace("\"","\"\"");
+        data.title = $(".title").text().replace(/'/g,"\'\'")
+        data.text = $(".text").html().replace(/'/g,"\'\'")
         // 判断输入是否合法
         if (data.title == "Title" || data.text == "Lorem ipsum dolor sit amet, consectetur adipisici elit,."||data.title=='') {
             alert("不合法的输入");
