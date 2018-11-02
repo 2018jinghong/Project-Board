@@ -188,8 +188,9 @@ function post(command, f_id,adminCode=0) {
                 if (!IsPC()) {
                     window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");
                 }
+
                 window.history.back();
-                window.location.reload();
+               
             }else{
                 window.location.reload();
             }
