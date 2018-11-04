@@ -26,8 +26,9 @@ function GetPageInfo() {
     //定义
     $.get("datainfo.php?page=0", function(data, status) {
         var data = JSON.parse(data);
-        var v = $(".switchPage-button").clone(); //复制按钮
+        var v = $("#model-button").clone(); //复制按钮
         for (var i = 2; i <= data.allPages; i++) {
+            v.removeAttr('id');
             v.html(i);
             v.appendTo(".page-container");
             v = v.clone();
@@ -147,7 +148,7 @@ function Clean() {
     var v0 = $(".spinner").clone();
     var v = $("#model-message").clone();
     var v2 = $("#model-comment").clone();
-    var v3 = $(".switchPage-button")[0].clone();
+    var v3 = $("#model-button").clone();
     $("#message-container").empty();
     $("#page-container").empty();
     v0.appendTo("#message-container");
