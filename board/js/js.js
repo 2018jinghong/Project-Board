@@ -147,11 +147,13 @@ function Clean() {
     var v0 = $(".spinner").clone();
     var v = $("#model-message").clone();
     var v2 = $("#model-comment").clone();
+    var v3 = $(".switchPage-button")[0].clone();
     $("#message-container").empty();
     $("#page-container").empty();
     v0.appendTo("#message-container");
     v.appendTo("#message-container");
     v2.appendTo("#message-container");
+    v3.appendTo("#page-container");
     $(".spinner").show(); //显示等待
 }
 
