@@ -192,7 +192,8 @@ function post(command, f_id,adminCode=0) {
                 window.history.back();
                
             }else{
-                window.location.reload();
+                Clean();
+                Get_data(1);
             }
            
         } else {

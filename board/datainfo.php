@@ -131,9 +131,6 @@ function json()
             }
         }
     }
-
-
-
     $conn->close();
     $foo_json = json_encode($array);
     echo $foo_json;
