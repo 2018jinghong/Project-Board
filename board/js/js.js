@@ -148,6 +148,7 @@ function Clean() {
     var v = $("#model-message").clone();
     var v2 = $("#model-comment").clone();
     $("#message-container").empty();
+    $("#page-container").empty();
     v0.appendTo("#message-container");
     v.appendTo("#message-container");
     v2.appendTo("#message-container");
@@ -188,7 +189,6 @@ function post(command, f_id,adminCode=0) {
                 if (!IsPC()) {
                     window.open("//qr.alipay.com/c1x03755egvovifw2ztz8aa");
                 }
-
                 window.history.back();
                
             }else{
