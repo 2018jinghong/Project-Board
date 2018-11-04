@@ -193,6 +193,7 @@ function post(command, f_id,adminCode=0) {
                
             }else{
                 Clean();
+                GetPageInfo();
                 Get_data(1);
             }
            
