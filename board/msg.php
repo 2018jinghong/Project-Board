@@ -17,7 +17,7 @@ class response
     {
         if ($_REQUEST['id']!=0) {
             $array = array();
-            $servername = "132.232.120.208;
+            $servername = "132.232.120.208";
             $username = "user";
             $password = "123Jhwl@zjut";
             $dbname = "severData";
